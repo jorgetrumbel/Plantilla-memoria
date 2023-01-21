@@ -24,13 +24,11 @@ parskip, % Uncomment to add space between paragraphs
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
-
-
 %----------------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Título del trabajo} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\thesistitle{Controlador CAN de servomotores} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -39,9 +37,9 @@ headsepline, % Uncomment to get a line under the header
 %\posgrado{Maestría en Sistemas Embebidos} 
 %\posgrado{Maestría en Internet de las cosas}
 
-\author{Nombre del autor} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
+\author{Ing. Alejandro Virgillo} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
-\director{Nombre del director (pertenencia)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
+\director{Esp. Ing. Gabriel Gavinowich (FIUBA)} % El nombre del director, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \dirname
 \codirector{Nombre del codirector (pertenencia)} % El nombre del codirector si lo hubiera, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \codirname.  Para activar este campo se debe descomentar la opción "codirector" en el comando \documentclass, línea 23.
 
 \juradoUNO{Nombre del jurado 1 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur1name
@@ -49,10 +47,10 @@ headsepline, % Uncomment to get a line under the header
 \juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 
 %\ciudad{Ciudad Autónoma de Buenos Aires}
-\ciudad{ciudad de Mendoza}
+\ciudad{Ciudad Autónoma de Buenos Aires}
 
-\fechaINICIO{marzo de 2020}
-\fechaFINAL{diciembre de 2020}
+\fechaINICIO{Octubre de 2021}
+\fechaFINAL{Abril de 2023}
 
 
 \keywords{Sistemas embebidos, FIUBA} % Keywords for your thesis, print it elsewhere with \keywordnames
@@ -76,21 +74,13 @@ headsepline, % Uncomment to get a line under the header
 %The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 \centering
 
-El resumen debe escribirse en uno o dos párrafo.  Debe ser breve y conciso sin ningún elemento de formato en el texto como itálicas o negrita. Tampoco se deben usar siglas ni acrónimos que no resulten obvios para un lector promedio de la memoria, ni referencias bibliográficas o notas al pie de página.  No debe faltar qué es lo que se hizo/logró, qué importancia/valor tiene el proyecto/resultado, qué va a encontrar el lector en la memoria y qué contenidos de la especialización/maestría se aplicaron en el proyecto.
+En el presente trabajo se aborda el proceso de planificación, diseño y fabricación de un dispositivo que actúe de interfaz para que un operario de planta pueda monitorear y programar motores paso a paso que usan una plaqueta de control a medida conectados a través de un bus CAN (Controller Area Network). El desarrollo se plantea para uso industrial y se ensaya en la planta de la empresa argentina Cambre ICyFSA.
+
+El documento detalla las herramientas de planificación y gestión empleadas, la selección de componentes electrónicos, la descripción de los protocolos de
+comuncación empleados, el desarrollo del software embebido, el diseño y fabricación del hardware y su gabinete y las consideraciones de manufactura que se tomaron.
+Todo esto acompañado con su documentación apropiada y con las pruebas de validación realizadas.
 
 \end{abstract}
-
-%----------------------------------------------------------------------------------------
-%	CONTENIDO DE LA MEMORIA  - AGRADECIMIENTOS
-%----------------------------------------------------------------------------------------
-
-\begin{acknowledgements}
-%\addchaptertocentry{\acknowledgementname} % Descomentando esta línea se puede agregar los agradecimientos al índice
-\vspace{1.5cm}
-
-Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONAL}.  
-
-\end{acknowledgements}
 
 %----------------------------------------------------------------------------------------
 %	LISTA DE CONTENIDOS/FIGURAS/TABLAS
@@ -101,14 +91,6 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 \listoffigures % Prints the list of figures
 
 \listoftables % Prints the list of tables
-
-
-%----------------------------------------------------------------------------------------
-%	CONTENIDO DE LA MEMORIA  - DEDICATORIA
-%----------------------------------------------------------------------------------------
-
-\dedicatory{\textbf{Dedicado a... [OPCIONAL]}}  % escribir acá si se desea una dedicatoria
-
 %----------------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - CAPÍTULOS
 %----------------------------------------------------------------------------------------
@@ -130,7 +112,6 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 %----------------------------------------------------------------------------------------
 
 \appendix % indicativo para indicarle a LaTeX los siguientes "capítulos" son apéndices
-
 % Incluir los apéndices de la memoria como archivos separadas desde la carpeta Appendices
 % Descomentar las líneas a medida que se escriben los apéndices
 
@@ -148,4 +129,4 @@ Esta sección es para agradecimientos personales y es totalmente \textbf{OPCIONA
 
 %----------------------------------------------------------------------------------------
 
-\end{document}  
+\end{document}

@@ -19,94 +19,81 @@
 
 %\section{Introducción}
 
-%----------------------------------------------------------------------------------------
-\section{Aprendiendo \LaTeX{}}
-
-\LaTeX{} no es \textsc{WYSIWYG} (What You See is What You Get), a diferencia de los procesadores de texto como Microsoft Word o Pages de Apple o incluso LibreOffice en el mundo open-source. En lugar de ello, un documento escrito para \LaTeX{} es en realidad un archivo de texto simple o llano que \emph{no contiene formato} . Nosotros le decimos a \LaTeX{} cómo deseamos que se aplique el formato en el documento final escribiendo comandos simples entre el texto, por ejemplo, si quiero usar texto en itálicas para dar énfasis, escribo \verb|\it{texto}| y pongo el texto que quiero en itálicas entre medio de las llaves. Esto significa que \LaTeX{} es un lenguaje del tipo \enquote{mark-up}, muy parecido a HTML.
-
-\subsection{Una introducción (no tan corta) a \LaTeX{}}
-
-Si sos nuevo en \LaTeX{}, hay un muy buen libro electrónico - disponible gratuitamente en Internet como un archivo PDF - llamado, \enquote{A (not so short) Introduction to \LaTeX{}}. El título del libro es generalmente acortado a simplemente \emph{lshort}. Puede descargar la versión más reciente en inglés (ya que se actualiza de vez en cuando) desde aquí:
-\url{http://www.ctan.org/tex-archive/info/lshort/english/lshort.pdf}
-
-Se puede encontrar la versión en español en la lista en esta página: \url{http://www.ctan.org/tex-archive/info/lshort/}
-
-\subsubsection{Una subsubsección}
-
-Acá tiene un ejemplo de una ``subsubsección'' que es el cuarto nivel de ordenamiento del texto, después de capítulo, sección y subsección.  Como se puede ver, las subsubsecciones no van numeradas en el cuerpo del documento ni en el índice.  El formato está definido por la plantilla y no debe ser modificado.
-
-\subsection{Guía matemática rápida para \LaTeX{}}
-
-Si estás escribiendo un documento con mucho contenido matemático, entonces es posible que desees leer el documento de la AMS (American Mathematical Society) llamado, \enquote{A Short Math Guide for \LaTeX{}}. Se puede encontrar en línea en el siguiente link: \url{http://www.ams.org/tex/amslatex.html} en la sección \enquote{Additional Documentation} hacia la parte inferior de la página.
-
+En esta sección se da una explicación general de los temas sobre los cuales se basa este trabajo. Se dará una introducción al protocolo CAN - \textit{Controller Area Network} y a qué es un servomotor. También se hablará sobre el proyecto SN-17 y la motivación y alcance del trabajo, así como el estado del arte de esta tecnología.
 
 %----------------------------------------------------------------------------------------
+\section{Controller Area Network - CAN}
 
-\section{Utilizando esta plantilla}
-
-Si estás familiarizado con \LaTeX{}, entonces podés explorar la estructura de directorios de esta plantilla y proceder a personalizarla agregando tu información en el bloque \emph{INFORMACIÓN DE LA PORTADA} en el archivo \file{memoria.tex}.  
-
-Se puede continuar luego modificando el resto de los archivos siguiendo los lineamientos que se describen en la sección \ref{sec:FillingFile} en la página \pageref{sec:FillingFile}.
-
-Debés asegurarte de leer el capítulo \ref{Chapter2} acerca de las convenciones utilizadas para las Memoria de los Trabajos Finales de la \degreename.
-
-Si sos nuevo en \LaTeX{}, se recomienda que continúes leyendo el documento ya que contiene información básica para aprovechar el potencial de esta herramienta.
-
-
-%----------------------------------------------------------------------------------------
-
-\section{Qué incluye esta plantilla}
-
-\subsection{Carpetas}
-
-Esta plantilla se distribuye como una único archivo .zip que se puede descomprimir en varios archivos y carpetas. Asimismo, se puede consultar el repositorio git para obtener la última versión de los archivos, \url{https://github.com/patriciobos/Plantilla-CESE.git}. Los nombres de las carpetas son, o pretender ser, auto-explicativos.
-
-\keyword{Appendices} -- Esta es la carpeta donde se deben poner los apéndices. Cada apéndice debe ir en su propio archivo \file{.tex}. Se incluye un ejemplo y una plantilla en la carpeta.
-
-\keyword{Chapters} -- Esta es la carpeta donde se deben poner los capítulos de la memoria. Cada capítulo debe ir un su propio archivo \file{.tex} por separado.  Se ofrece por defecto, la siguiente estructura de capítulos y se recomienda su utilización dentro de lo posible:
-
+\textit{Controller Area Network} o CAN es un protocolo de comunicación desarrollado por Bosch \citep{wikipedia_CAN} orientado originalmente a la industria automotriz, y hoy en día es empleado en muchas otras aplicaciones. En el año 1991 Bosch publicó la especificación CAN 2.0 donde se diferencian aspectos de identificación de dispositivos conectados en la red y, en el año 1993, se estandarizó el protocolo bajo la norma internacional ISO 11898 \citep{web_ISO_CAN}.
+CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción, se pensó para proveer comunicaciones deterministicas en sistemas complejos, teniendo las siguientes cualidades \citep{Understanding_CAN}:
 \begin{itemize}
-\item Capítulo 1: Introducción general	
-\item Capítulo 2: Introducción específica
-\item Capítulo 3: Diseño e implementación
-\item Capítulo 4: Ensayos y resultados
-\item Capítulo 5: Conclusiones
-
+	\item Prioridad de mensajes y latencia máxima asegurada.
+	\item Comunicaciones a varios dispositivos al mismo tiempo.	
+	\item Bus multi-maestro.
+	\item Detección de errores en nodos y mensajes.
+	\item Protocolo asincrónico - sin línea de clock.
 \end{itemize}
+El estándar abarca solamente las capas física y de enlace de datos, es decir, las 2 capas más bajas en un modelo OSI - \textit{Open System Interconection}, como el que se puede ver en la Figura \ref{fig:modeloOsi}. Para las capas superiores, existen otros estándares, como CANOpen\protect\footnotemark, del cual se tomaron ideas para este proyecto, pero no se implementa en si.
 
-Esta estructura de capítulos es la que se recomienda para las memorias de la especialización.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.8]{./Figures/OSI_model.JPG}
+	\caption{Modelo de capas OSI\protect\footnotemark}
+	\label{fig:modeloOsi}
+\end{figure}
 
-\keyword{Figures} -- Esta carpeta contiene todas las figuras de la memoria.  Estas son las versiones finales de las imágenes que van a ser incluidas en la memoria.  Pueden ser imágenes en formato \textit{raster}\footnote{\url{https://en.wikipedia.org/wiki/Raster_graphics}} como \file{.png}, \file{.jpg} o en formato vectoriales\footnote{\url{https://en.wikipedia.org/wiki/Vector_graphics}} como \file{.pdf}, \file{.ps}.  Se debe notar que utilizar imágenes vectoriales disminuye notablemente el peso del documento final y acelera el tiempo de compilación por lo que es recomendable su utilización siempre que sea posible.
+\footnotetext{\url{https://www.can-cia.org/canopen/}} %Link a CANOpen
 
-\subsection{Archivos}
+\footnotetext{\url{https://www.cloudflare.com/es-es/learning/ddos/glossary/open-systems-interconnection-model-osi/}} %Link a imagen de modelo OSI
 
-También están incluidos varios archivos, la mayoría de ellos son de texto plano y se puede ver su contenido en un editor de texto. Después de la compilación inicial, se verá que más archivos auxiliares son creados por \ LaTeX{} o BibTeX, pero son de uso interno y no es necesario hacer nada en particular con ellos.  Toda la información necesaria para compilar el documento se encuentra en los archivos \file{.tex}, \file{.bib}, \file{.cls} y en las imágenes de la carpeta Figures.
+Para realizar la transferencia de información CAN emplea líneas de transmisión, comunmente llamados CAN High y CAN Low, y estos son los únicos enlaces requeridos. Al comienzo de cada mensaje, se emplea un identificador, que indica la prioridad del mensaje, así como a quien está dirigido. Usando esta información cada nodo de la red determina que hacer. En la Figura \ref{fig:canBus}, se puede ver un esquema básico de una red CAN.
 
-\keyword{referencias.bib} - este es un archivo importante que contiene toda la información de referencias bibliográficas que se utilizarán para las citas en la memoria en conjunto con BibTeX. Usted puede escribir las entradas bibliográficas en forma manual, aunque existen también programas de gestión de referencias que facilitan la creación y gestión de las referencias y permiten exportarlas en formato BibTeX.  También hay disponibles sitios web como \url{books.google.com} que permiten obtener toda la información necesaria para una cita en formato BibTeX. Ver sección \ref{sec:biblio}
 
-\keyword{MastersDoctoralThesis.cls} -- este es un archivo importante. Es el archivos con la clase que le informa a \LaTeX{} cómo debe dar formato a la memoria. El usuario de la plantilla no debería necesitar modificar nada de este archivo.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.6]{./Figures/canBus.png}
+	\caption{Esquema de red CAN\protect\footnotemark}
+	\label{fig:canBus}
+\end{figure}
 
-\keyword{memoria.pdf} -- esta es su memoria con una tipografía bellamente compuesta (en formato de archivo PDF) creado por \LaTeX{}. Se distribuye con la plantilla y después de compilar por primera vez sin hacer ningún cambio se debería obtener una versión idéntica a este documento.
+\footnotetext{\url{https://www.seeedstudio.com/blog/2019/11/27/introduction-to-can-bus-and-how-to-use-it-with-arduino/}} %Link a imagen de Red CAN
+%----------------------------------------------------------------------------------------
 
-\keyword{memoria.tex} -- este es un archivo importante. Este es el archivo que tiene que compilar \LaTeX{} para producir la memoria como un archivo PDF. Contiene un marco de trabajo y estructuras que le indican a \LaTeX{} cómo diagramar la memoria.  Está altamente comentado para que se pueda entender qué es lo que realiza cada línea de código y por qué está incluida en ese lugar.  En este archivo se debe completar la información personalizada de las primeras sección según se indica en la sección \ref{sec:FillingFile}.
+\section{Servomotores}
 
-Archivos que \emph{no} forman parte de la distribución de la plantilla pero que son generados por \LaTeX{} como archivos auxiliares necesarios para la producción de la memoria.pdf son:
+Un servomotor es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular del eje, así como la velocidad de rotación y el torque. En general, el tipo de motor eléctrico que se emplee no determina si es o no un servomotor, sino que cuente las cualidades de control mencionadas. Para lograr esto, suele emplearse un sistema de lazo cerrado que se retroalimenta con la información proporcionada por un sensor que mide la posición angular del eje, llamado encoder. Esto es procesado por un controlador, quien se encarga de proporcionar la corriente adecuada a las bobinas del motor para que este se mueva de la forma indicada. En la Figura \ref{fig:servomotor} se puede ver un servomotor con sus distintas partes.
 
-\keyword{memoria.aux} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.6]{./Figures/servomotor.jpg}
+	\caption{Esquema un servomotor\protect\footnotemark}
+	\label{fig:servomotor}
+\end{figure}
 
-\keyword{memoria.bbl} -- este es un archivo auxiliar generado por BibTeX, si se borra BibTeX simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}. Mientras que el archivo \file{.bib} contiene todas las referencias que hay, este archivo \file{.bbl} contine sólo las referencias que han sido citadas y se utiliza para la construcción de la bibiografía.
+\footnotetext{\url{https://www.logicbus.com.mx/blog/que-es-un-servo-motor/}} %Link a imagen de servomotor
 
-\keyword{memoria.blg} -- este es un archivo auxiliar generado por BibTeX, si se borra BibTeX simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
+%----------------------------------------------------------------------------------------
 
-\keyword{memoria.lof} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.  Le indica a \LaTeX{} cómo construir la sección \emph{Lista de Figuras}.
- 
-\keyword{memoria.log} --  este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}. Contiene mensajes de \LaTeX{}. Si se reciben errores o advertencias durante la compilación, se guardan en este archivo \file{.log}.
+\section{Proyecto SN-17 - Servo Nema 17}
 
-\keyword{memoria.lot} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.  Le indica a \LaTeX{} cómo construir la sección \emph{Lista de Tablas}.
+El proyecto SN-17 es un sistema desarrollado por la organización A3 Engineering que permite convertir motores eléctricos del tipo paso a paso o \textit{steppers} en servomotores. Este tipo de motores tienen, similar a un servomotor, la capacidad de controlar su posición y velocidad, pero con un lazo de control abierto. En caso de que haya perturbaciones al funcionamiento normal, el motor pierde el control de la posición y debe realizar una rutina de \textit{homing} para recuperarlo. Esto puede traer problemas en ciertas aplicaciones de precisión. Además, son incapaces de entregar torque constante a la salida, por el mismo motivo. El sistema SN-17 agrega un encoder y un controlador al motor, generando un lazo cerrado y logrando las funcionalidades de un servomotor. En la Figura \ref{fig:SN17} se puede observar una placa de control SN-17. Esta se coloca en la parte trasera de un motor paso a paso y se lo conecta directamente.
 
-\keyword{memoria.out} -- este es un archivo auxiliar generado por \LaTeX{}, si se borra \LaTeX{} simplemente lo regenera cuando se compila el archivo principal \file{memoria.tex}.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.3]{./Figures/SN17_5.jpeg}
+	\caption{Plaqueta SN-17}
+	\label{fig:SN17}
+\end{figure}
 
-De esta larga lista de archivos, sólo aquellos con la extensión \file{.bib}, \file{.cls} y \file{.tex} son importantes.  Los otros archivos auxiliares pueden ser ignorados o borrados ya que \LaTeX{} y BibTeX los regenerarán durante la compilación.
+Además de generar las funcionalidades mencionadas, el sistema SN-17 tiene señales discretas industriales que le permiten comunicarse a través de ese medio con controladores industriales (\textit{Programmable Logic Controllers} o PLCs) o pueden controlar un pequeño proceso por su cuenta.
+Actualmente, se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la Figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.6]{./Figures/Prensador-N17.PNG}
+	\caption{Actuador lineal con SN-17}
+	\label{fig:aplicacionSN17}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
 
