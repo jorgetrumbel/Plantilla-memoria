@@ -25,6 +25,7 @@ En esta sección se da una explicación general de los temas sobre los cuales se
 \section{Controller Area Network - CAN}
 
 \textit{Controller Area Network} o CAN es un protocolo de comunicación desarrollado por Bosch \citep{wikipedia_CAN} orientado originalmente a la industria automotriz, y hoy en día es empleado en muchas otras aplicaciones. En el año 1991 Bosch publicó la especificación CAN 2.0 donde se diferencian aspectos de identificación de dispositivos conectados en la red y, en el año 1993, se estandarizó el protocolo bajo la norma internacional ISO 11898 \citep{web_ISO_CAN}.
+
 CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción, se pensó para proveer comunicaciones deterministicas en sistemas complejos, teniendo las siguientes cualidades \citep{Understanding_CAN}:
 \begin{itemize}
 	\item Prioridad de mensajes y latencia máxima asegurada.
@@ -33,25 +34,13 @@ CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su con
 	\item Detección de errores en nodos y mensajes.
 	\item Protocolo asincrónico - sin línea de clock.
 \end{itemize}
-El estándar abarca solamente las capas física y de enlace de datos, es decir, las 2 capas más bajas en un modelo OSI - \textit{Open System Interconection}, como el que se puede ver en la Figura \ref{fig:modeloOsi}. Para las capas superiores, existen otros estándares, como CANOpen\protect\footnotemark, del cual se tomaron ideas para este proyecto, pero no se implementa en si.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[scale=.8]{./Figures/OSI_model.JPG}
-	\caption{Modelo de capas OSI\protect\footnotemark}
-	\label{fig:modeloOsi}
-\end{figure}
-
-\footnotetext{\url{https://www.can-cia.org/canopen/}} %Link a CANOpen
-
-\footnotetext{\url{https://www.cloudflare.com/es-es/learning/ddos/glossary/open-systems-interconnection-model-osi/}} %Link a imagen de modelo OSI
 
 Para realizar la transferencia de información CAN emplea líneas de transmisión, comunmente llamados CAN High y CAN Low, y estos son los únicos enlaces requeridos. Al comienzo de cada mensaje, se emplea un identificador, que indica la prioridad del mensaje, así como a quien está dirigido. Usando esta información cada nodo de la red determina que hacer. En la Figura \ref{fig:canBus}, se puede ver un esquema básico de una red CAN.
 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=.6]{./Figures/canBus.png}
+	\includegraphics[scale=.6]{./Figures/CANBUS-Esquema.jpg}
 	\caption{Esquema de red CAN\protect\footnotemark}
 	\label{fig:canBus}
 \end{figure}
@@ -61,7 +50,7 @@ Para realizar la transferencia de información CAN emplea líneas de transmisió
 
 \section{Servomotores}
 
-Un servomotor es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular del eje, así como la velocidad de rotación y el torque. En general, el tipo de motor eléctrico que se emplee no determina si es o no un servomotor, sino que cuente las cualidades de control mencionadas. Para lograr esto, suele emplearse un sistema de lazo cerrado que se retroalimenta con la información proporcionada por un sensor que mide la posición angular del eje, llamado encoder. Esto es procesado por un controlador, quien se encarga de proporcionar la corriente adecuada a las bobinas del motor para que este se mueva de la forma indicada. En la Figura \ref{fig:servomotor} se puede ver un servomotor con sus distintas partes.
+Un servomotor\citep{Industrial_Automation_Hands_On} es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular del eje, así como la velocidad de rotación y el torque. En general, el tipo de motor eléctrico que se emplee no determina si es o no un servomotor, sino que cuente las cualidades de control mencionadas. Para lograr esto, suele emplearse un sistema de lazo cerrado que se retroalimenta con la información proporcionada por un sensor que mide la posición angular del eje, llamado encoder. Esto es procesado por un controlador, quien se encarga de proporcionar la corriente adecuada a las bobinas del motor para que este se mueva de la forma indicada. En la Figura \ref{fig:servomotor} se puede ver un servomotor con sus distintas partes.
 
 \begin{figure}[htbp]
 	\centering
@@ -86,6 +75,7 @@ El proyecto SN-17 es un sistema desarrollado por la organización A3 Engineering
 \end{figure}
 
 Además de generar las funcionalidades mencionadas, el sistema SN-17 tiene señales discretas industriales que le permiten comunicarse a través de ese medio con controladores industriales (\textit{Programmable Logic Controllers} o PLCs) o pueden controlar un pequeño proceso por su cuenta.
+
 Actualmente, se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la Figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
 
 \begin{figure}[htbp]
@@ -97,184 +87,66 @@ Actualmente, se está trabajando en implementar estos sistemas en la planta de l
 
 %----------------------------------------------------------------------------------------
 
-\section{Entorno de trabajo}
+\section{Motivación}
 
-Ante de comenzar a editar la plantilla debemos tener un editor \LaTeX{} instalado en nuestra computadora.  En forma análoga a lo que sucede en lenguaje C, que se puede crear y editar código con casi cualquier editor, existen ciertos entornos de trabajo que nos pueden simplificar mucho la tarea.  En este sentido, se recomienda, sobre todo para los principiantes en \LaTeX{} la utilización de TexMaker, un programa gratuito y multi-plantaforma que está disponible tanto para windows como para sistemas GNU/linux.
+En la actualidad, el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático. Sin embargo, en los últimos años, el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que estos poseen. Estos suelen emplear un servomotor en su interior, y junto con un mecanismo generan el movimiento deseado con una precisión superior. Aún así, este tipo de actuadores tienen un problema en su elevado costo, que termina limitando su uso. En este contexto, la organización A3 Engineering desarrolló el sistema SN-17 en un intento de disminuir los costos de los servomotores de aplicaciones pequeñas y, en un futuro, de los actuadores eléctricos.
 
-La versión más reciente de TexMaker es la 4.5 y se puede descargar del siguiente link: \url{http://www.xm1math.net/texmaker/download.html}. Se puede consultar el manual de usuario en el siguiente link: \url{http://www.xm1math.net/texmaker/doc.html}.
- 
+El sistema SN-17 cuenta con un problema a la hora de su utilización: la programación de los motores es compleja y se requiere de altos conocimientos técnicos para realizar modificaciones. Esto se debe a que, para cambiar las instrucciones del programa, es necesario modificar el firmware del sistema. Cuando se implementó inicialmente en planta, el sistema funcionó de forma exitosa, pero poco flexible. 
 
-\subsection{Paquetes adicionales}
-
-Si bien durante el proceso de instalación de TexMaker, o cualquier otro editor que se haya elegido, se instalarán en el sistema los paquetes básicos necesarios para trabajar con \LaTeX{}, la plantilla de los trabajos de Especialización y Maestría requieren de paquete adicionales.
-
-Se indican a continuación los comandos que se deben introducir en la consola de Ubuntu (ctrl + alt + t) para instalarlos:
-
-\begin{lstlisting}[language=bash]
-  $ sudo apt install texlive-lang-spanish texlive-science 
-  $ sudo apt install texlive-bibtex-extra biber
-  $ sudo apt install texlive texlive-fonts-recommended
-  $ sudo apt install texlive-latex-extra
-\end{lstlisting}
+Con esta situación, se planteó la necesidad de que un técnico de planta sin mucho entrenamiento pudiera cambiar la programación y parámetros de funcionamiento de los motores. También, se consideró que sería conveniente, para maquinarias con varios motores conectados, poder hacer que todos estén dentro de una misma red, permitiendo así controles sobre conjuntos de motores.
 
 
-\subsection{Configurando TexMaker}
+%----------------------------------------------------------------------------------------
 
+\section{Estado del arte}
 
+Actualmente existe una gran oferta de servomotores y motores paso a paso. En general, lo que en el ámbito industrial se refiere a servomotores\citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un valor significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia, convirtiendolos en soluciones de alto costo. En los casos que se requiere alta potencia o muy alto rendimiento, estos son la mejor opción. Suelen requerir de técnicos muy capacitados para su programación y suelen ofrecer interfaces de usuario avanzadas.
 
-Una vez instalado el programa y los paquetes adicionales se debe abrir el archivo memoria.tex con el editor para ver una pantalla similar a la que se puede apreciar en la figura \ref{fig:texmaker}. 
-Una vez instalado el programa y los paquetes adicionales se debe abrir el archivo memoria.tex con el editor para ver una pantalla similar a la que se puede apreciar en la figura \ref{fig:texmaker}. 
-Una vez instalado el programa y los paquetes adicionales se debe abrir el archivo memoria.tex con el editor para ver una pantalla similar a la que se puede apreciar en la figura \ref{fig:texmaker}. 
-Una vez instalado el programa y los paquetes adicionales se debe abrir el archivo memoria.tex con el editor para ver una pantalla similar a la que se puede apreciar en la figura \ref{fig:texmaker}. 
+Por otro lado, en lo referido a motores \textit{steppers}, la oferta también es variada. Estos pueden adquirirse a precios muy accesibles y en distintos tamaños con lazo abierto. Requieren el uso de un \textit{driver} externo para su operación, y su programación suele hacerse con programas de terceros. Dependiendo la aplicación, pueden requerir de conocimientos técnicos elevados. También existen variantes que agregan un encoder de posición angular, comúnmente llamados \textit{closedloop steppers}. Estos solventan uno de los mayores problemas de estos motores, relacionado con la pérdida de posición en caso de una perturbación, pero no permiten entregar torque constante. También requieren de \textit{drivers} externos y, según el fabricante, las interfaces de programación pueden ser complejas.
 
-\vspace{1cm}
+Finalmente, existen placas de control que, además de funcionar como un \textit{closed loop stepper}, tienen un \textit{driver} incorporado que permite alimentar las bobinas de una forma diferente, logrando entregar torques constantes. El problema principal de estas soluciones es que suelen tener características de \textit{hobbista} y no son aplicables en ámbitos industriales y, además, suelen requerir mucho conocimiento técnico para su programación. En la Figura \ref{fig:mechaduino} se puede ver un ejemplo de una de estas placas llamado \textit{Mechaduino} \citep{web_mechaduino}.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=.5\textwidth]{./Figures/texmaker.png}
-	\caption{Entorno de trabajo de texMaker.}
-	\label{fig:texmaker}
+	\includegraphics[scale=.6]{./Figures/mechaduino.jpg}
+	\caption{Proyecto Mechaduino\protect\footnotemark}
+	\label{fig:mechaduino}
 \end{figure}
 
-\vspace{1cm}
+\footnotetext{\url{https://tropical-labs.com/mechaduino/}} %Link a imagen de mechaduino
 
-Notar que existe una vista llamada Estructura a la izquierda de la interfaz que nos permite abrir desde dentro del programa los archivos individuales de los capítulos.  A la derecha se encuentra una vista con el archivo propiamente dicho para su edición. Hacia la parte inferior se encuentra una vista del log con información de los resultados de la compilación.  En esta última vista pueden aparecen advertencias o \textit{warning}, que normalmente pueden ser ignorados, y los errores que se indican en color rojo y deben resolverse para que se genere el PDF de salida.
+En la Tabla \ref{tab:servos} se resume la información explicada en esta sección.
 
-Recordar que el archivo que se debe compilar con PDFLaTeX es \file{memoria.tex}, si se tratara de compilar alguno de los capítulos saldría un error.  Para salvar la molestia de tener que cambiar de archivo para compilar cada vez que se realice una modificación en un capítulo, se puede definir el archivo \file{memoria.tex} como ``documento maestro'' yendo al menú opciones -> ``definir documento actual como documento maestro'', lo que permite compilar con PDFLaTeX memoria.tex directamente desde cualquier archivo que se esté modificando . Se muestra esta opción en la figura \ref{fig:docMaestro}.
 
-\begin{figure}[h]
+\begin{table}[h]
 	\centering
-	\includegraphics[width=\textwidth]{./Figures/docMaestro.png}
-	\caption{Definir memoria.tex como documento maestro.}
-	\label{fig:docMaestro}
-\end{figure}
-
-En el menú herramientas se encuentran las opciones de compilación.  Para producir un archivo PDF a partir de un archivo .tex se debe ejecutar PDFLaTeX (el shortcut es F6). Para incorporar nueva bibliografía se debe utilizar la opción BibTeX del mismo menú herramientas (el shortcut es F11).
-
-Notar que para actualizar las tablas de contenidos se debe ejecutar PDFLaTeX dos veces.  Esto se debe a que es necesario actualizar algunos archivos auxiliares antes de obtener el resultado final.  En forma similar, para actualizar las referencias se debe ejecutar primero PDFLaTeX, después BibTeX y finalmente PDFLaTeX dos veces por idénticos motivos.
-
-\section{Personalizando la plantilla, el archivo \file{memoria.tex}}
-\label{sec:FillingFile}
-
-Para personalizar la plantilla se debe incorporar la información propia en los distintos archivos \file{.tex}. 
-
-Primero abrir \file{memoria.tex} con TexMaker (o el editor de su preferencia). Se debe ubicar dentro del archivo el bloque de código titulado \emph{INFORMACIÓN DE LA PORTADA} donde se deben incorporar los primeros datos personales con los que se construirá automáticamente la portada.
-
-
+	\caption[Estado del arte]{Resumen de características de servomotores}
+	\begin{tabular}{c c c c c c}    
+		\toprule
+		\textbf{Motor} 	 & \textbf{Control}  & \textbf{Driver} & \textbf{Programación} & \textbf{Industrial} & \textbf{Precio (USD)} \\
+		\midrule
+		Servomotor & Lazo cerrado & Externo & Complejo & Sí	& > \$ 1.500 \\		
+		\textit{Stepper open loop} & Lazo abierto & Externo & Intermedio & Sí	& \$ 300\\
+		\textit{Stepper closed loop} & L. Cerrado s/torque	& Externo & Intermedio & Sí	& \$ 400\\
+		\textit{Mechaduino} & Lazo cerrado	& Interno & Complejo & No	& \$ 200 \\
+		SN-17 + interfaz	& Lazo cerrado	& Interno & Simple & Sí		& \$ 300 \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:servos}
+\end{table}
 %----------------------------------------------------------------------------------------
 
-\section{El código del archivo \file{memoria.tex} explicado}
+\section{Objetivos y alcance}
 
-El archivo \file{memoria.tex} contiene la estructura del documento y es el archivo de mayor jerarquía de la memoria.  Podría ser equiparable a la función \emph{main()} de un programa en C, o mejor dicho al archivo fuente .c donde se encuentra definida la función main().
-
-La estructura básica de cualquier documento de \LaTeX{} comienza con la definición de clase del documento, es seguida por un preámbulo donde se pueden agregar funcionalidades con el uso de \texttt{paquetes} (equiparables a bibliotecas de C), y finalmente, termina con el cuerpo del documento, donde irá el contenido de la memoria.
-
-\lstset{%
-  basicstyle=\small\ttfamily,
-  language=[LaTeX]{TeX}
-}
-
-\begin{lstlisting}
-\documentclass{article}  <- Definicion de clase
-\usepackage{listings}	 <- Preambulo
-
-\begin{document}	 <- Comienzo del contenido propio 
-	Hello world!
-\end{document}
-\end{lstlisting}
-
-
-El archivo \file{memoria.tex} se encuentra densamente comentado para explicar qué páginas, secciones y elementos de formato está creando el código \LaTeX{} en cada línea. El código está dividido en bloques con nombres en mayúsculas para que resulte evidente qué es lo que hace esa porción de código en particular. Inicialmente puede parecer que hay mucho código \LaTeX{}, pero es principalmente código para dar formato a la memoria por lo que no requiere intervención del usuario de la plantilla.  Sí se deben personalizar con su información los bloques indicados como:
+El objetivo de este trabajo es proporcionar una interfaz de usuario para el sistema SN-17 que permita que un operario, con poco entrenamiento, pueda modificar los programas de los disntintos motores conectados a través de una red CAN con el sistema desarrollado. A su vez, debe poder emplearse para monitorear el estado los motores conectados cuando están operativos. Por lo tanto, el proyecto incluye:
 
 \begin{itemize}
-	\item Informacion de la memoria
-	\item Resumen
-	\item Agradecimientos
-	\item Dedicatoria
+	\item Una interfaz de usuario que permita configurar y supervisar los servomotores conectados.
+	\item La construcción e implementación de la estructura de mensajes CAN.
+	\item La configuración de la red CAN.
+	\item El desarrollo y fabricación de una plaqueta con el sistema embebido.
+	\item El desarrollo del firmware para este sistema y la adaptación del firmware del sistema SN-17.
 \end{itemize}
 
-El índice de contenidos, las listas de figura de tablas se generan en forma automática y no requieren intervención ni edición manual por parte del usuario de la plantilla. 
 
-En la parte final del documento se encuentran los capítulos y los apéndices.  Por defecto se incluyen los 5 capítulos propuestos que se encuentran en la carpeta /Chapters. Cada capítulo se debe escribir en un archivo .tex separado y se debe poner en la carpeta \emph{Chapters} con el nombre \file{Chapter1}, \file{Chapter2}, etc\ldots El código para incluir capítulos desde archivos externos se muestra a continuación.
-
-\begin{verbatim}
-	\include{Chapters/Chapter1}
-	\include{Chapters/Chapter2} 
-	\include{Chapters/Chapter3}
-	\include{Chapters/Chapter4} 
-	\include{Chapters/Chapter5} 
-\end{verbatim}
-
-Los apéndices también deben escribirse en archivos .tex separados, que se deben ubicar dentro de la carpeta \emph{Appendices}. Los apéndices vienen comentados por defecto con el caracter \code{\%} y para incluirlos simplemente se debe eliminar dicho caracter.
-
-Finalmente, se encuentra el código para incluir la bibliografía en el documento final.  Este código tampoco debe modificarse. La metodología para trabajar las referencias bibliográficas se desarrolla en la sección \ref{sec:biblio}.
-%----------------------------------------------------------------------------------------
-
-\section{Bibliografía}
-\label{sec:biblio}
-
-Las opciones de formato de la bibliografía se controlan a través del paquete de latex \option{biblatex} que se incluye en la memoria en el archivo memoria.tex.  Estas opciones determinan cómo se generan las citas bibliográficas en el cuerpo del documento y cómo se genera la bibliografía al final de la memoria.
-
-En el preámbulo se puede encontrar el código que incluye el paquete biblatex, que no requiere ninguna modificación del usuario de la plantilla, y que contiene las siguientes opciones:
-
-\begin{lstlisting}
-\usepackage[backend=bibtex,
-	natbib=true, 
-	style=numeric, 
-	sorting=none]
-{biblatex}
-\end{lstlisting}
-
-En el archivo \file{reference.bib} se encuentran las referencias bibliográficas que se pueden citar en el documento.  Para incorporar una nueva cita al documento lo primero es agregarla en este archivo con todos los campos necesario.  Todas las entradas bibliográficas comienzan con $@$ y una palabra que define el formato de la entrada.  Para cada formato existen campos obligatorios que deben completarse. No importa el orden en que las entradas estén definidas en el archivo .bib.  Tampoco es importante el orden en que estén definidos los campos de una entrada bibliográfica. A continuación se muestran algunos ejemplos:
-
-\begin{lstlisting}
-@ARTICLE{ARTICLE:1,
-    AUTHOR="John Doe",
-    TITLE="Title",
-    JOURNAL="Journal",
-    YEAR="2017",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@BOOK{BOOK:1,
-    AUTHOR="John Doe",
-    TITLE="The Book without Title",
-    PUBLISHER="Dummy Publisher",
-    YEAR="2100",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@INBOOK{BOOK:2,
-    AUTHOR="John Doe",
-    TITLE="The Book without Title",
-    PUBLISHER="Dummy Publisher",
-    YEAR="2100",
-    PAGES="100-200",
-}
-\end{lstlisting}
-
-
-\begin{lstlisting}
-@MISC{WEBSITE:1,
-    HOWPUBLISHED = "\url{http://example.com}",
-    AUTHOR = "Intel",
-    TITLE = "Example Website",
-    MONTH = "12",
-    YEAR = "1988",
-    URLDATE = {2012-11-26}
-}
-\end{lstlisting}
-
-Se debe notar que los nombres \emph{ARTICLE:1}, \emph{BOOK:1}, \emph{BOOK:2} y \emph{WEBSITE:1} son nombres de fantasía que le sirve al autor del documento para identificar la entrada. En este sentido, se podrían reemplazar por cualquier otro nombre.  Tampoco es necesario poner : seguido de un número, en los ejemplos sólo se incluye como un posible estilo para identificar las entradas.
-
-La entradas se citan en el documento con el comando: 
-
-\begin{verbatim}
-\citep{nombre_de_la_entrada}
-\end{verbatim}
-
-Y cuando se usan, se muestran así: \citep{ARTICLE:1}, \citep{BOOK:1}, \citep{BOOK:2}, \citep{WEBSITE:1}.  Notar cómo se conforma la sección Bibliografía al final del documento. 
