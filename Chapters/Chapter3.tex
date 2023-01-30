@@ -42,11 +42,13 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 1
 %----------------------------------------------------------------------------------------
-\section{Estructura del sistema embebido}
+\section{Arquitectura del sistema embebido}
  
 \section{Selección de componentes}
 
 \section{Desarrollo de software}
+
+INDICAR QUE EL SOFTWARE SE DESARROLLO PRIMERO EN PLACA DE DESARROLLO Y DESPUES SE IMPLEMENTO
 
 \subsection{Driver CAN}
 
@@ -58,5 +60,26 @@
 
 \section{Desarrollo de Hardware}
 
-\section{Desarrollo de carcasa}
+Para el desarrollo del hardware se utilizó el software de diseño Altium\footnote{\url{https://www.altium.com/}} y se eligió como fabricante a PCBWING\footnote{\url{https://www.pcbwing.com/}} que es una empresa con la que trabaja comúnmente Cambre ICyFSA. Se tomó, como punto de partida, las capacidades técnicas de este fabricante.
 
+Se decidió hacer una placa de 4 capas, con dimensiones menores a 100 x 100 mm. Esto se debe a que el fabricante PCBWING ofrece precios más económicos para estas condiciones de fabricación y se consideró que no imponen restricciones importantes el diseño requerido.
+
+
+\section{Desarrollo de gabinete}
+
+Para el desarrollo del gabinete se usó el software de diseño Autodesk Inventor\footnote{\url{https://www.autodesk.com/products/inventor/overview?term=1-YEAR&tab=subscription}}. Se determinó armar un ensamble en que incluya todos los componentes y se lo pensó para poder luego ser impreso en 3D.
+
+Para los componentes comprados, como la pantalla LCD y la matriz de botones, se tomaron los modelos 3D libres conseguidos a través de la plataforma GrabCAD\footnote{\url{https://grabcad.com/}}. Estos se verificaron para asegurarse que sus medidas correspondieran con el dispositivo físico. Por ultimo, el modelo de la plaqueta desarrollada se exportó desde el software Altium, donde se diseñó.
+
+También, se priorizó el acceso a los conectores de la plaqueta, para permitir realizar cambios de cableados con poco esfuerzo, pero manteniendo los circuitos protegidos. Esto se puede ver en la Figura \ref{fig:ensamble} donde se muestra el ensamble completo en Inventor. Notar que las piezas superiores, donde están la pantalla y el teclado, se muestran transparentes, para ayudar con la visualización.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.6]{./Figures/asm_3d.JPG}
+	\caption{Ensamble 3D de gabinete}
+	\label{fig:ensamble}
+\end{figure}
+
+Como se puede ver, el ensamble consta de 3 componentes: una tapa delantera donde apoyan el display y el teclado, una caja intermedia que encierra a estos y una caja trasera donde se coloca la plaqueta de control. Se decidió por esta forma para permitir una presentación cómoda de los elementos de interfaz, para que el cableado interno quede protegido y para que se tenga fácil acceso a los conectores de la plaqueta, como se mecionó previamente.
+
+Una vez cerrado el diseño, se exportó el archivo al programa UltiMaker Cura\footnote{\url{https://ultimaker.com/software/ultimaker-cura}}, donde se generaron los archivos de fabricación para impresión 3D. Se decidió utilizar PLA, que es uno de los plásticos más económicos y simples de manipular, y que cuenta con las características mecánicas apropiadas para la aplicación. Luego de fabricado, se forman las roscas en las distintas piezas y se ensambla el conjunto.

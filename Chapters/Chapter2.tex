@@ -154,7 +154,7 @@ Las pantallas LCD ofrecen una forma conveniente y económica para generar una in
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=1]{./Figures/LCD.jpg}
+	\includegraphics[scale=1.4]{./Figures/LCD.jpg}
 	\caption{Pantalla LCD 20x4\protect\footnotemark}
 	\label{fig:Pantalla_LCD}
 \end{figure}
@@ -169,12 +169,12 @@ A la hora de implementar una solución con este tipo de pantallas, puede tomarse
 
 \subsection{Matriz de botones}
 
-Las matrices de botones consisten en un conjunto de contactos normalmente abiertos que conectan una fila con una columna cuando se presionan. La metodología de uso consiste en conectar las filas a pines de entrada con resistores de pull-up en el microcontrolador y las columnas a pines de salida. La secuencia que se realiza es poner el nivel de tensión de una columna por vez en bajo (mientras las otras se mantienen en un nivel alto). En ese momento, se leen las entradas de las filas, si alguna está en un nivel bajo es indicación de que el botón de esa fila y columna fue presionado (ya que normalmente estarían en un nivel alto por las resistencias de pull-up)\citep{Arduino_Cookbook}. En la Figura \ref{fig:but_matrix} se puede visualizar un esquema de conexionado de una matriz de botones 3x3 a un microcontrolador. Notar también que se muestran los conexionados internos de la matriz, de las filas y las columnas.
+Las matrices de botones consisten en un conjunto de contactos normalmente abiertos que conectan una fila con una columna cuando se presionan. La metodología de uso consiste en conectar las filas a pines de entrada con resistores de pull-up en el microcontrolador y las columnas a pines de salida. La secuencia que se realiza es poner el nivel de tensión de una columna por vez en bajo (mientras las otras se mantienen en un nivel alto). En ese momento, se leen las entradas de las filas, si alguna está en un nivel bajo es indicación de que el botón de esa fila y columna fue presionado (ya que normalmente estarían en un nivel alto por las resistencias de pull-up)\citep{Arduino_Cookbook}. En la Figura \ref{fig:but_matrix} se puede visualizar un esquema de conexionado de una matriz de botones 4x3 a un microcontrolador. Notar también que se muestran los conexionados internos de la matriz, de las filas y las columnas.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=.6]{./Figures/But_Matrix.JPG}
-	\caption{Conexión de matriz de botones 3x3\citep{Arduino_Cookbook}}
+	\caption{Conexión de matriz de botones 4x3\citep{Arduino_Cookbook}}
 	\label{fig:but_matrix}
 \end{figure}
 
