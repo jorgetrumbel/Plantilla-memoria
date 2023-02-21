@@ -19,23 +19,23 @@
 
 %\section{Introducción}
 
-En esta sección se da una explicación general de los temas sobre los cuales se basa este trabajo. Se dará una introducción al protocolo CAN - \textit{Controller Area Network} y a qué es un servomotor. También se hablará sobre el proyecto SN-17 y la motivación y alcance del trabajo, así como el estado del arte de esta tecnología.
+En esta sección se da una introducción al protocolo CAN o \textit{Controller Area Network}\citep{web_cia_can} y al concepto de un servomotor. Se describe el proyecto SN-17, la motivación y alcance del trabajo, y se resume el estado del arte de esta tecnología.
 
 %----------------------------------------------------------------------------------------
-\section{Controller Area Network - CAN}
+\section{Controller area network}
 
-\textit{Controller Area Network} o CAN es un protocolo de comunicación desarrollado por Bosch \citep{wikipedia_CAN} orientado originalmente a la industria automotriz, y hoy en día es empleado en muchas otras aplicaciones. En el año 1991 Bosch publicó la especificación CAN 2.0 donde se diferencian aspectos de identificación de dispositivos conectados en la red y, en el año 1993, se estandarizó el protocolo bajo la norma internacional ISO 11898 \citep{web_ISO_CAN}.
+CAN es un protocolo de comunicación desarrollado por la empresa Bosch \citep{can_basics_microchip} orientado originalmente a la industria automotriz, que se popularizó y hoy es empleado en diversas industrias. En el año 1991 Bosch publica la especificación CAN 2.0 y, en el año 1993, es adoptado internacionalmente bajo la norma ISO 11898 \citep{web_ISO_CAN}.
 
-CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción, se pensó para proveer comunicaciones deterministicas en sistemas complejos, teniendo las siguientes cualidades \citep{Understanding_CAN}:
+CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción fue pensado para proveer comunicaciones determinísticas en sistemas complejos, caracterizado por las siguientes cualidades\citep{Understanding_CAN}:
 \begin{itemize}
 	\item Prioridad de mensajes y latencia máxima asegurada.
 	\item Comunicaciones a varios dispositivos al mismo tiempo.	
 	\item Bus multi-maestro.
 	\item Detección de errores en nodos y mensajes.
-	\item Protocolo asincrónico - sin línea de clock.
+	\item Protocolo asincrónico sin línea de clock.
 \end{itemize}
 
-Para realizar la transferencia de información CAN emplea líneas de transmisión, comunmente llamados CAN High y CAN Low, y estos son los únicos enlaces requeridos. Al comienzo de cada mensaje, se emplea un identificador, que indica la prioridad del mensaje, así como a quien está dirigido. Usando esta información cada nodo de la red determina que hacer. En la Figura \ref{fig:canBus}, se puede ver un esquema básico de una red CAN.
+Para realizar la transferencia de información CAN requiere únicamente 2 líneas de transmisión denominados CAN High y CAN Low. Al comienzo de cada mensaje se emplea un identificador que indica la prioridad del mensaje, así como a quien está dirigido. Usando esta información cada nodo de la red determina que acción debe realizar. En la Figura \ref{fig:canBus} se presenta un esquema básico de una red CAN compuesta por 5 nodos.
 
 
 \begin{figure}[htbp]
@@ -50,12 +50,12 @@ Para realizar la transferencia de información CAN emplea líneas de transmisió
 
 \section{Servomotores}
 
-Un servomotor\citep{Industrial_Automation_Hands_On} es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular del eje, así como la velocidad de rotación y el torque. En general, el tipo de motor eléctrico que se emplee no determina si es o no un servomotor, sino que cuente las cualidades de control mencionadas. Para lograr esto, suele emplearse un sistema de lazo cerrado que se retroalimenta con la información proporcionada por un sensor que mide la posición angular del eje, llamado encoder. Esto es procesado por un controlador, quien se encarga de proporcionar la corriente adecuada a las bobinas del motor para que este se mueva de la forma indicada. En la Figura \ref{fig:servomotor} se puede ver un servomotor con sus distintas partes.
+Un servomotor\citep{Industrial_Automation_Hands_On} es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular de su eje, así como la velocidad de rotación y el torque de salida. Esto se consigue con la utilización de un sistema de lazo cerrado de control que se retroalimenta con un sensor de posición angular, llamado \textit{encoder}. En general, el tipo de bobinas del motor eléctrico no determina si es o no un servomotor, sino que cuente con las cualidades de control descriptas. En la Figura \ref{fig:servomotor} se pueden observar las distintas partes que conforman a un servomotor.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=0.6]{./Figures/servomotor.jpg}
-	\caption{Esquema un servomotor\protect\footnotemark}
+	\includegraphics[scale=0.7]{./Figures/servomotor.jpg}
+	\caption{Partes de un servomotor\protect\footnotemark}
 	\label{fig:servomotor}
 \end{figure}
 
@@ -65,18 +65,18 @@ Un servomotor\citep{Industrial_Automation_Hands_On} es un tipo de motor eléctri
 
 \section{Proyecto SN-17}
 
-El proyecto SN-17 (Servo NEMA 17) es un sistema desarrollado por la organización A3 Engineering que permite convertir motores eléctricos del tipo paso a paso o \textit{steppers} en servomotores. Este tipo de motores tienen, similar a un servomotor, la capacidad de controlar su posición y velocidad, pero con un lazo de control abierto. En caso de que haya perturbaciones al funcionamiento normal, el motor pierde el control de la posición y debe realizar una rutina de \textit{homing} para recuperarlo. Esto puede traer problemas en ciertas aplicaciones de precisión. Además, son incapaces de entregar torque constante a la salida, por el mismo motivo. El sistema SN-17 agrega un encoder y un controlador al motor, generando un lazo cerrado y logrando las funcionalidades de un servomotor. En la Figura \ref{fig:SN17} se puede observar una placa de control SN-17. Esta se coloca en la parte trasera de un motor paso a paso y se lo conecta directamente.
+El proyecto SN-17 (Servo NEMA 17) es un sistema desarrollado por la organización A3 Engineering que adapta motores eléctricos del tipo paso a paso o \textit{steppers} para funcionar como servomotores. El sistema SN-17 agrega un \textit{encoder} y un \textit{driver} al motor, generando un lazo cerrado y logrando las funcionalidades de un servomotor. En la Figura \ref{fig:SN17} se puede observar una placa de control SN-17. Esta se coloca en la parte trasera del motor paso a paso, donde se lo conecta.
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=.3]{./Figures/SN17_5.jpeg}
+	\includegraphics[scale=.4]{./Figures/SN17_5.jpeg}
 	\caption{Plaqueta SN-17}
 	\label{fig:SN17}
 \end{figure}
 
-Además de generar las funcionalidades mencionadas, el sistema SN-17 tiene señales discretas industriales que le permiten comunicarse a través de ese medio con controladores industriales (\textit{Programmable Logic Controllers} o PLCs) o pueden controlar un pequeño proceso por su cuenta.
+Además de generar las funcionalidades mencionadas, el sistema SN-17 tiene señales discretas industriales que le permiten comunicarse con controladores industriales (\textit{Programmable Logic Controllers} o PLCs).
 
-Actualmente, se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la Figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
+Actualmente se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA\citep{web_cambre}, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la Figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
 
 \begin{figure}[htbp]
 	\centering
@@ -89,22 +89,62 @@ Actualmente, se está trabajando en implementar estos sistemas en la planta de l
 
 \section{Motivación}
 
-En la actualidad, el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático. Sin embargo, en los últimos años, el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que estos poseen. Estos suelen emplear un servomotor en su interior, y junto con un mecanismo generan el movimiento deseado con una precisión superior. Aún así, este tipo de actuadores tienen un problema en su elevado costo, que termina limitando su uso. En este contexto, la organización A3 Engineering desarrolló el sistema SN-17 en un intento de disminuir los costos de los servomotores de aplicaciones pequeñas y, en un futuro, de los actuadores eléctricos.
+En la actualidad el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático BUSCAR REFERENCIA. Sin embargo, en los últimos años el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que poseen y a sus menores costos operativos\citep{web_comparacion_actuadores}. En la Tabla \ref{tab:comparacion_neumatico_electrico} se muestra una comparativa de ambos tipos de actuadores.
 
-El sistema SN-17 cuenta con un problema a la hora de su utilización: la programación de los motores es compleja y se requiere de altos conocimientos técnicos para realizar modificaciones. Esto se debe a que, para cambiar las instrucciones del programa, es necesario modificar el firmware del sistema. Cuando se implementó inicialmente en planta, el sistema funcionó de forma exitosa, pero poco flexible. 
+\begin{table}[htpb]
+	\centering
+	\caption[Comparación de actuadores neumáticos y eléctricos]{Comparación de actuadores neumáticos y eléctricos}
+	\begin{tabular}{c | c | c}    
+		\toprule
+		 	 & \textbf{Actuadores neumáticos}  & \textbf{Actuadores eléctricos}\\
+		\midrule
+		\textbf{Diseño} 			& Simple 		& Complejo \\
+		\textbf{Implementación} 	& Simple 		& Complejo \\				
+		\textbf{Fuerza} 			& Según presión de aire	& Según reducción mecánica \\
+		\textbf{Presición}			& Baja 	& Alta \\
+		\textbf{Repetitibilidad}	& Baja 	& Alta \\
+		\textbf{Eficiencia}			& Baja 	& Alta \\
+		\textbf{Control de movimiento}	& Bajo 	& Alto \\
+		\textbf{Mantenimiento}	& Alto 	& Bajo \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:comparacion_neumatico_electrico}
+\end{table}
 
-Con esta situación, se planteó la necesidad de que un técnico de planta sin mucho entrenamiento pudiera cambiar la programación y parámetros de funcionamiento de los motores. También, se consideró que sería conveniente, para maquinarias con varios motores conectados, poder hacer que todos estén dentro de una misma red, permitiendo así controles sobre conjuntos de motores.
+Los actuadores eléctricos suelen emplear un servomotor en su interior que, junto con un mecanismo, generan el movimiento deseado con una precisión superior a los actuadores neumáticos. Aún así, este tipo de actuadores tienen como problema su elevado costo de adquisición y su dificultad de implementación, que limitan su uso. En este contexto, la organización A3 Engineering desarrolló el sistema SN-17 en un intento de disminuir los costos de los servomotores de aplicaciones pequeñas y, en un futuro, de los actuadores eléctricos.
+
+La empresa Cambre ICyFSA instaló una serie de sistemas SN-17 en su planta productiva, con resultados iniciales exitosos. Sin embargo, con la utilización de los sistemas surgió la problemática de la dificultad para reprogramarlos en momentos de necesidad. La motivación de este trabajo es brindar una interfaz de programación simplificada para una red de motores que pueda ser utilizada por personal no especializado.
 
 
 %----------------------------------------------------------------------------------------
 
 \section{Estado del arte}
 
-Actualmente existe una gran oferta de servomotores y motores paso a paso. En general, lo que en el ámbito industrial se refiere a servomotores\citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un valor significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia, convirtiendolos en soluciones de alto costo. En los casos que se requiere alta potencia o muy alto rendimiento, estos son la mejor opción. Suelen requerir de técnicos muy capacitados para su programación y suelen ofrecer interfaces de usuario avanzadas.
+Actualmente existe una gran oferta de servomotores y motores paso a paso. En general, lo que en el ámbito industrial se refiere a servomotores\citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un valor significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia, convirtiéndolos en soluciones de alto costo. En los casos que se requiere alta potencia o muy alto rendimiento, estos son la mejor opción. Suelen requerir de técnicos muy capacitados para su programación y ofrecen interfaces de usuario avanzadas. Un motor AC de la empresa Panasonic, junto con su \textit{driver} se presenta en la Figura \ref{fig:ac-servo}.
 
-Por otro lado, en lo referido a motores \textit{steppers}, la oferta también es variada. Estos pueden adquirirse a precios muy accesibles y en distintos tamaños con lazo abierto. Requieren el uso de un \textit{driver} externo para su operación, y su programación suele hacerse con programas de terceros. Dependiendo la aplicación, pueden requerir de conocimientos técnicos elevados. También existen variantes que agregan un encoder de posición angular, comúnmente llamados \textit{closedloop steppers}. Estos solventan uno de los mayores problemas de estos motores, relacionado con la pérdida de posición en caso de una perturbación, pero no permiten entregar torque constante. También requieren de \textit{drivers} externos y, según el fabricante, las interfaces de programación pueden ser complejas.
 
-Finalmente, existen placas de control que, además de funcionar como un \textit{closed loop stepper}, tienen un \textit{driver} incorporado que permite alimentar las bobinas de una forma diferente, logrando entregar torques constantes. El problema principal de estas soluciones es que suelen tener características de \textit{hobbista} y no son aplicables en ámbitos industriales y, además, suelen requerir mucho conocimiento técnico para su programación. En la Figura \ref{fig:mechaduino} se puede ver un ejemplo de una de estas placas llamado \textit{Mechaduino} \citep{web_mechaduino}.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.8]{./Figures/ac-servo.png}
+	\caption{Servomotor AC con \textit{driver}\protect\footnotemark}
+	\label{fig:ac-servo}
+\end{figure}
+
+\footnotetext{\url{https://na.industrial.panasonic.com/products/industrial-automation/motion-control/lineup/ac-servo-motors}} %Link a imagen de servomotor
+
+Por otro lado, en lo referido a motores \textit{steppers}, la oferta también es variada. Estos pueden adquirirse a precios muy accesibles y en distintos tamaños con lazo abierto. Requieren el uso de un \textit{driver} externo para su operación y su programación suele hacerse con programas de terceros. Según la aplicación, pueden requerir de conocimientos técnicos elevados. También existen variantes que agregan un \textit{encoder} de posición angular,  llamados \textit{closed loop steppers}. Estos solventan uno de los mayores problemas de estos motores relacionado con la pérdida de posición en caso de una perturbación, pero no permiten entregar torque constante. También requieren de \textit{drivers} externos y, según el fabricante, las interfaces de programación pueden ser complejas. Un ejemplo de un \textit{closed loop stepper} se presenta en la Figura \ref{fig:closed-loop-stepper}, junto con su \textit{driver} correspondiente.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=.6]{./Figures/closed_loop_stepper.png}
+	\caption{\textit{Closed loop stepper} con \textit{driver}\protect\footnotemark}
+	\label{fig:closed-loop-stepper}
+\end{figure}
+
+\footnotetext{\url{https://www.autonics.com/product/category/2000023}} %Link a imagen de closed loop stepper
+
+Finalmente, existen placas de control que, además de funcionar como un \textit{closed loop stepper}, tienen un \textit{driver} incorporado que permite controlar los motores de forma diferente, logrando entregar torques constantes. El problema principal de estas soluciones es que suelen tener características de \textit{hobbista} y no son aplicables en ámbitos industriales. Además, requieren elevado conocimiento técnico para su programación debido a la falta de interfaces de programación. En la Figura \ref{fig:mechaduino} se puede ver un ejemplo de una de estas placas llamada \textit{Mechaduino} \citep{web_mechaduino}.
 
 \begin{figure}[htbp]
 	\centering
@@ -123,13 +163,13 @@ En la Tabla \ref{tab:servos} se resume la información explicada en esta secció
 	\caption[Estado del arte]{Resumen de características de servomotores}
 	\begin{tabular}{c c c c c c}    
 		\toprule
-		\textbf{Motor} 	 & \textbf{Control}  & \textbf{Driver} & \textbf{Programación} & \textbf{Industrial} & \textbf{Precio (USD)} \\
+		\textbf{Motor} 	 & \textbf{Lazo de control}  & \textbf{\textit{Driver}} & \textbf{Programación} & \textbf{Industrial} & \textbf{Precio (USD)} \\
 		\midrule
-		Servomotor & Lazo cerrado & Externo & Complejo & Sí	& > \$ 1.500 \\		
-		\textit{Stepper open loop} & Lazo abierto & Externo & Intermedio & Sí	& \$ 300\\
-		\textit{Stepper closed loop} & L. Cerrado s/torque	& Externo & Intermedio & Sí	& \$ 400\\
-		\textit{Mechaduino} & Lazo cerrado	& Interno & Complejo & No	& \$ 200 \\
-		SN-17 + interfaz	& Lazo cerrado	& Interno & Simple & Sí		& \$ 300 \\
+		Servomotor & Cerrado & Externo & Compleja & Sí	& >  1.500 \\		
+		\textit{Stepper open loop} & Abierto & Externo & Intermedia & Sí	&  300\\
+		\textit{Stepper closed loop} & Cerrado s/torque	& Externo & Intermedia & Sí	&  400\\
+		\textit{Mechaduino} & Cerrado	& Interno & Compleja & No	&  200 \\
+		SN-17 + interfaz	& Cerrado	& Interno & Simple & Sí		&  300 \\
 		\bottomrule
 		\hline
 	\end{tabular}
@@ -139,7 +179,9 @@ En la Tabla \ref{tab:servos} se resume la información explicada en esta secció
 
 \section{Objetivos y alcance}
 
-El objetivo de este trabajo es proporcionar una interfaz de usuario para el sistema SN-17 que permita que un operario, con poco entrenamiento, pueda modificar los programas de los disntintos motores conectados a través de una red CAN con el sistema desarrollado. A su vez, debe poder emplearse para monitorear el estado los motores conectados cuando están operativos. Por lo tanto, el proyecto incluye:
+El objetivo de este trabajo es proporcionar una interfaz de usuario para el sistema SN-17 que permita que un operario no especializado pueda modificar los programas de los distintos motores conectados a través de una red CAN. La interfaz también debe poder emplearse para monitorear el estado de los motores conectados cuando están operativos. 
+
+El proyecto incluye:
 
 \begin{itemize}
 	\item Una interfaz de usuario que permita configurar y supervisar los servomotores conectados.

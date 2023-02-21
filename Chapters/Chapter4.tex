@@ -12,14 +12,14 @@ En este capítulo se detallan los ensayos y mediciones realizados sobre el siste
 
 \section{Banco de pruebas}
 
-Para validar el correcto funcionamiento del sistema, se ensambló un conjunto, se le cargó el firmware y se armó una red CAN con algunos motores paso a paso con plaquetas SN-17 conectadas. Dependiendo el ensayo a realizar, se conectaron 1 o más motores a la red, junto con un osciloscopio INSERTAR MARCA DEL OSCILOSCOPIO). Los dispositivos se alimentan con una fuente DC regulable YIHUA 305D\footnote{\url{http://yihuasoldering.com/product-4-2-30v-dc-power-supply/160008/}} trabajando a 24 V.
+Para validar el correcto funcionamiento del sistema, se ensambló un conjunto, se le cargó el firmware y se armó una red CAN con algunos motores paso a paso con plaquetas SN-17 conectadas. Dependiendo el ensayo a realizar, se conectaron 1 o más motores a la red, junto con un osciloscopio Hantek DSO2D10\footnote{\url{http://hantek.com/products/detail/17182}}. Los dispositivos se alimentan con una fuente DC regulable YIHUA 305D\footnote{\url{http://yihuasoldering.com/product-4-2-30v-dc-power-supply/160008/}} trabajando a 24 V.
 
 En la Figura \ref{fig:Banco} puede verse un esquema de la composición del banco de pruebas y los conexionados. En la PC se corre un programa de monitor serial llamado PuTTy\footnote{\url{https://www.putty.org/}} que se emplea para visualizar de forma simplificada el mensaje que el sistema intenta envíar a la red CAN.
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=1]{./Figures/LCD.jpg}
-	\caption{Banco de pruebas utilizado para verificaciones}
+	\caption{Banco de pruebas utilizado para verificaciones - ARAMR FIGURA}
 	\label{fig:Banco}
 \end{figure}
 
@@ -27,18 +27,25 @@ En la Figura \ref{fig:Banco} puede verse un esquema de la composición del banco
 
 \section{Ensayo de mensajes CAN}
 
-En la Figura \ref{fig:niv_señal} se puede ver una de las tramas CAN tomadas desde el osciloscopio. En esta, se pueden ver claramente las señales CAN-H y CAN-L en un estado recesivo a 2.5 V y separándose un poco más de 1 V en ambos sentidos en un estado dominante, este es el comportamiento esperado. Notar también la falta de ruido en la señal, lo que indica la correcta operación de los resistores de terminación
+En la Figura \ref{fig:niv_señal} se puede ver una de las tramas CAN tomadas desde el osciloscopio. En esta, se pueden ver las señales CAN-H y CAN-L en un estado recesivo a 2.5 V y separándose un poco más de 1 V, en ambos sentidos, en un estado dominante, este es el comportamiento esperado. Notar también la falta de ruido en la señal, lo que indica la correcta operación de los resistores de terminación
 
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[scale=0.6]{./Figures/Message_Change_Operation_Mode_CONFIG.jpg}
-	\caption{Níveles de señal CAN en osciloscopio}
+	\caption{Niveles de señal CAN en osciloscopio}
 	\label{fig:niv_señal}
 \end{figure}
 
-AGREGAR MEDICION DE TIEMPO
+En la Figura \ref{fig:tiempo_bit_can} se presenta la medición de tiempo tomada desde el osciloscopio para uno de los bits de un mensaje CAN. Se puede ver en la esquina superior izquierda el valor de tiempo obtenido de 4.1 $\mu$s, que es lo esperado según lo explicado en la sección \ref{comunicacion_can}. Este tiempo implica una velocidad de transmisión de 250 kb/s.
 
-Para la verificación de los mensajes CAN se probaron cada uno de los mensajes posibles. Se revisó que el identificador y la data fueran correctas y que los sistemas conectados realizaran las acciones correspondientes.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.6]{./Figures/bit_time_can.jpeg}
+	\caption{Medición de tiempo de bit}
+	\label{fig:tiempo_bit_can}
+\end{figure}
+
+Para la verificación de los mensajes CAN se probaron cada uno de los mensajes posibles. Se revisó que el identificador y la data fueran correctas y que los sistemas conectados realizaran las acciones correspondientes. Siguiendo esta metodología, se ensayaron cada uno de los mensajes especificados, según la Tabla \ref{tab:tipos_mensajes_CAN}.
 
 En la Figura \ref{fig:mot_calib} se puede ver una imagen tomada del osciloscopio para la instrucción de calibrar motor (código: 0x0c). En la parte iferior puede verse el decodificador CAN que el osciloscopio trae incorporado, marcando correctamente la instrucción. También, se puede ver el identificador del mensaje (código: 0x0b) compuesto por el identificador del motor (0x05) y el bit final indicando que es un mensaje desde el dispositivo controlador. El resto de los bytes de data se marcan en 0, ya que no es necesario envíar más información para este tipo de mensaje, los últimos bytes pertenecen al CRC.
 
@@ -58,10 +65,88 @@ Otro ejemplo de mensaje puede visualizarse en la Figura \ref{fig:mot_move} en la
 	\label{fig:mot_move}
 \end{figure}
 
+
 \section{Ensayos eléctricos}
 
-\section{Ensayos de mensajes UART}
+Los ensayos eléctricos se realizaron sobre la plaqueta de control conectada directamente a la fuente de alimentación regulable configurada a 24 V y sin ningún otro dispositivo conectado. Se hicieron mediciones utilizando un multímetro para verificar que los niveles de tensión del sistema fueran los apropiados. Las verificaciones realizadas se presentan en la Tabla \ref{tab:verificaciones_electricas}.
+
+\begin{table}[h]
+	\centering
+	\caption[Verificaciones eléctricas]{Verificaciones eléctricas}
+	\begin{tabular}{c c c}    
+		\toprule
+		\textbf{Ensayo} 	 & 		\textbf{Descripción} \\
+		\midrule
+		Regulador & 5 V a la salida del regulador\\
+		Referencias fuente & 24 V en bornes de referencia de fuente \\
+		Referencias regulador & 5 V en bornes de referencia de controlador \\
+		IOs controlador & 5 V en bornes de IOs de controlador \\		
+		IOs puenteadas 	& 24 V en IOs aisladas puenteadas a tensión de entrada \\
+		IOs	diferidas	& IOs aisladas a 12 V con alimentación de sistema a 24 V \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:verificaciones_electricas}
+\end{table} 
+
+Con respecto a las salidas PNP del sistema, se ensayaron con una conexión a un PLC Omron NX102\footnote{\url{https://www.ia.omron.com/data_pdf/cat/nx1_p130-e1_dita_4_4_csm1063211.pdf?id=3705}}. Las 4 salidas se conectaron a un módulo de entradas DC NX-ID5442 para este PLC que opera a 24 V. Se comprobó que, al activar las salidas, el PLC las recibiera de forma correcta.
+
+Para las entradas del sistema, se realizó un procedimiento similar, conectando cada una a un módulo de salidas PNP NX-OD5256. Se activaron las salidas desde el PLC y se verificó que se recibiera la señal desde el sistema.
+
+VER DE AGREGAR UNA IMAGEN CON EL DISPOSITIVO CONECTADO AL PLC
+
+\section{Ensayos de mensajes UART-USB}
+
+Para los mensajes de UART y USB se conectó el osciloscopio a la línea UART del sistema y a la conexión USB desde el sistema a una PC y se realizaron las mediciones.
+
+En la Figura \ref{fig:signal_uart} se muestra una imagen del osciloscopio con las mediciones realizadas sobre la señal de UART. Se verifica el tiempo de bit correcto de 106 $\mu$s, correspondiente a un \textit{baudrate} de 9600 y el nível de tensión de 5 V. Se comprobó que los mensajes enviados y recibidos fueran correctos y que el sistema actuara acorde.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.6]{./Figures/bit_time_uart.jpeg}
+	\caption{Medición de señal UART}
+	\label{fig:signal_uart}
+\end{figure}
+
+Por otro lado, se verificó que los niveles de señal USB, obtenida luego del integrado CY7C64225 fueran correctos. En la Figura \ref{fig:signal_usb} se presenta la medición obtenida, donde se ve la señal diferencial correspondiente al protocolo USB en modo \textit{full-speed}. Se puede comprobar el nivel de tensión de 3 V y el tiempo de bit de 83 ns. Esto corresponde con la especificación del dispositivo.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=0.6]{./Figures/msg_usb.jpeg}
+	\caption{Medición de señal USB}
+	\label{fig:signal_usb}
+\end{figure}
 
 \section{Pruebas de funcionamiento en planta}
 
+El dispositivo fue ensayado en la planta de Cambre ICyFSA, donde se conectó en una línea de ensamble automática, en un estado de desarrollo, la cual cuenta con varios sistemas SN-17 implementados para realizar distintas actuaciones mecánicas. También, la línea cuenta con un PLC Omron NX-102 que controla el proceso. La Figura \ref{fig:esquema_conexion_planta} muestra el esquema de conexionado empleado para realizar las pruebas del sistema en la línea de ensamblaje.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=1]{./Figures/LCD.jpg}
+	\caption{Esquema de conexionado en planta - ARAMR FIGURA}
+	\label{fig:esquema_conexion_planta}
+\end{figure}
+
+Con la disposición explicada, se realizó la programación de los sistemas SN-17 de la línea y se hicieron pruebas de monitoreo del sistema junto con los ensayos realizados sobre la línea. Se comprobó que el sistema mostrara correctamente el estado de funcionamiento en operación de los SN-17 y el número de programa e instrucción en ejecución de cada uno de ellos. En la Figura \ref{fig:pantalla_monitoreo} se observa la información de monitoreo que ofrece el sistema en el display de los motores conectados en operación. El primer número indica el número de programa en ejecución por el motor, el segundo el número de instrucción de ese programa.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=1]{./Figures/LCD.jpg}
+	\caption{Monitoreo de SN-17 - ARAMR FIGURA INCLUIR ERROR}
+	\label{fig:pantalla_monitoreo}
+\end{figure}
+
+También, se verificó la comunicación a través de señales discretas con el PLC. Como se puede observar en el display del sistema de la Figura \ref{fig:pantalla_monitoreo}, en caso de que un sistema SN-17 se encuentre en error este se visualiza junto al número de instrucción. En estos casos, el sistema envía una señal al PLC para indicarle el estado de error.
+
+En la Figura \ref{fig:sistema_en_planta} se muestra el sistema montado en la línea de ensamblaje automático en Cambre ICyFSA. Como se mencionó, la máquina se encuentra en desarrollo al momento de la escritura de este informe, por lo que la ubicación y montaje del sistema aún no están determinados y las conexiones con los diferentes dispositivos no es la definitiva.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[scale=1]{./Figures/LCD.jpg}
+	\caption{Sistema montado en línea de ensamble automático - ARAMR FIGURA}
+	\label{fig:sistema_en_planta}
+\end{figure}
+
 \section{Comparación con estado del arte}
+
