@@ -24,18 +24,16 @@ parskip, % Uncomment to add space between paragraphs
 headsepline, % Uncomment to get a line under the header
 ]{MastersDoctoralThesis} % The class file specifying the document structure
 
+%\counterwithout{footnote}{chapter}
+
 %----------------------------------------------------------------------------------------
 %	INFORMACIÓN DE LA MEMORIA
 %----------------------------------------------------------------------------------------
 
-\thesistitle{SCI-CAN: Controlador CAN de servomotores} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
+\thesistitle{Controlador CAN de servomotores} % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
-%\posgrado{Carrera de Especialización en Internet de las Cosas} 
-%\posgrado{Carrera de Especialización en Intelegencia Artificial}
-%\posgrado{Maestría en Sistemas Embebidos} 
-%\posgrado{Maestría en Internet de las cosas}
 
 \author{Ing. Alejandro Virgillo} % Tu nombre, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \authorname
 
@@ -46,7 +44,6 @@ headsepline, % Uncomment to get a line under the header
 \juradoDOS{Nombre del jurado 2 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur2name
 \juradoTRES{Nombre del jurado 3 (pertenencia)} % Nombre y pertenencia del un jurado se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \jur3name
 
-%\ciudad{Ciudad Autónoma de Buenos Aires}
 \ciudad{Ciudad Autónoma de Buenos Aires}
 
 \fechaINICIO{Octubre de 2021}
@@ -63,14 +60,14 @@ headsepline, % Uncomment to get a line under the header
 
 \pagestyle{plain} % Default to the plain heading style until the thesis style is called for the body content
 
-
 %----------------------------------------------------------------------------------------
 %	RESUMEN - ABSTRACT 
 %----------------------------------------------------------------------------------------
 
 \begin{abstract}
 \addchaptertocentry{\abstractname} % Add the abstract to the table of contents
-%
+
+
 %The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 \centering
 
@@ -95,15 +92,13 @@ El documento detalla los conocimientos utilizados sobre los protocolos de comunc
 
 \mainmatter % Begin numeric (1,2,3...) page numbering
 
-\pagestyle{thesis} % Return the page headers back to the "thesis" style
-
-% Incluir los capítulos como archivos separados desde la carpeta Chapters
+\pagestyle{thesis} %Return the page headers back to the thesis style
 
 \include{Chapters/Chapter1}
-\include{Chapters/Chapter2} 
+\include{Chapters/Chapter2}
 \include{Chapters/Chapter3}
-\include{Chapters/Chapter4} 
-\include{Chapters/Chapter5} 
+\include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
 
 %----------------------------------------------------------------------------------------
 %	CONTENIDO DE LA MEMORIA  - APÉNDICES
@@ -116,6 +111,7 @@ El documento detalla los conocimientos utilizados sobre los protocolos de comunc
 %\include{Appendices/AppendixA}
 %\include{Appendices/AppendixB}
 %\include{Appendices/AppendixC}
+%\include{Appendices/PlanProyecto.pdf}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
