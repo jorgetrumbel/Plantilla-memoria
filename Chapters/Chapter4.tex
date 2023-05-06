@@ -12,7 +12,7 @@ En este capítulo se detallan los ensayos y mediciones realizados tanto en banco
 
 \section{Banco de pruebas}
 
-En la figura \ref{fig:Banco} se puede observar el banco de pruebas utilizado. El osciloscopio es el modelo Hantek DSO2D10\citep{web_hantek} y la fuente regulable es una YIHUA 305D\citep{web_yihua}. En la PC se ejecuta un programa de monitor serial llamado PuTTy\citep{web_putty} que se emplea para visualizar de forma simplificada el mensaje que el sistema envía a la red CAN.
+En la figura \ref{fig:Banco} se puede observar el banco de pruebas utilizado. El osciloscopio es el modelo Hantek DSO2D10 \citep{web_hantek} y la fuente regulable es una YIHUA 305D \citep{web_yihua}. En la PC se ejecuta un programa de monitor serial llamado PuTTy \citep{web_putty} que se emplea para visualizar de forma simplificada el mensaje que el sistema envía a la red CAN.
 
 \begin{figure}[htbp]
 	\centering
@@ -53,7 +53,7 @@ Como ejemplo, la figura \ref{fig:mot_calib} presenta una imagen tomada del oscil
 	\label{fig:mot_calib}
 \end{figure}
 
-Otro ejemplo de mensaje puede visualizarse en la figura \ref{fig:mot_move} en la que se envía al motor un comando manual de movimiento angular (código: 0x10), en dirección en contra de las agujas del reloj (código 0x01), un ángulo de 360 grados (códigos: 0x01 y 0x68). En este caso, como el ángulo es un número que requiere más de un byte para su representación aparece descompuesto en el mensaje. Al recibir el mensaje, el motor correctamente gira lo estipulado.
+Otro ejemplo de mensaje puede visualizarse en la figura \ref{fig:mot_move} en la que se envía al motor un comando manual de movimiento angular (código: 0x10), en dirección en contra de las agujas del reloj (código 0x01), un ángulo de 360 grados (códigos: 0x01 y 0x68). En este caso, como el ángulo es un número que requiere más de un byte para su representación aparece descompuesto en el mensaje. Al recibir el mensaje, el motor realiza el giro estipulado.
 
 \begin{figure}[htbp]
 	\centering
@@ -86,7 +86,7 @@ Los ensayos eléctricos se realizaron sobre la plaqueta de control conectada dir
 	\label{tab:verificaciones_electricas}
 \end{table} 
 
-Las salidas PNP del sistema se ensayaron con una conexión a un PLC Omron NX102\citep{web_nx102}. Las cuatro se conectaron a un módulo de entradas DC NX-ID5442. Se comprobó que al activar las salidas el PLC las recibe de forma correcta.
+Las salidas PNP del sistema se ensayaron con una conexión a un PLC Omron NX102 \citep{web_nx102}. Las cuatro se conectaron a un módulo de entradas DC NX-ID5442. Se comprobó que al activar las salidas el PLC las recibe de forma correcta.
 
 Con las entradas del sistema se realizó un procedimiento similar, conectando cada una a un módulo de salidas PNP NX-OD5256. Se activaron las salidas desde el PLC y se verificó que se recibe la señal desde el sistema.
 

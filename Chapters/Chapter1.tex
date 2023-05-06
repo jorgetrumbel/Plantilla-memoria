@@ -17,14 +17,14 @@
 
 %----------------------------------------------------------------------------------------
 %\section{Introducción}
-En esta sección se da una introducción al protocolo CAN o \textit{Controller Area Network}\citep{web_cia_can} y al concepto de un servomotor. Se describe el proyecto SN-17, la motivación y alcance del trabajo y se resume el estado del arte de esta tecnología.
+En esta sección se da una introducción al protocolo CAN o \textit{Controller Area Network} \citep{web_cia_can} y al concepto de un servomotor. Se describe el proyecto SN-17, la motivación y alcance del trabajo y se resume el estado del arte de esta tecnología.
 
 %----------------------------------------------------------------------------------------
 \section{Controller area network}
 
 CAN es un protocolo de comunicación desarrollado por la empresa Bosch \citep{can_basics_microchip} orientado originalmente a la industria automotriz. En el año 1991 Bosch publica la especificación CAN 2.0 y, en el año 1993, es adoptado internacionalmente bajo la norma ISO 11898 \citep{web_ISO_CAN}. Desde sus inicios el protocolo obtuvo gran popularidad y en la actualidad es utilizado en diversas industrias.
 
-CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción fue pensado para proveer comunicaciones determinísticas en sistemas complejos, caracterizado por las siguientes cualidades\citep{UnderstandingCAN}:
+CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su concepción fue pensado para proveer comunicaciones determinísticas en sistemas complejos. Este protocolo cuenta con \citep{UnderstandingCAN}:
 \begin{itemize}
 	\item Prioridad de mensajes y latencia máxima asegurada.
 	\item Comunicaciones a varios dispositivos al mismo tiempo.	
@@ -35,8 +35,9 @@ CAN se caracteriza por su robustez y bajos requerimientos de cableado. En su con
 
 Para realizar la transferencia de información CAN requiere únicamente 2 líneas de transmisión denominados CAN High (CAN H) y CAN Low (CAN L). Los mensajes CAN contienen un identificador que indica la prioridad del mensaje, así como a quien está dirigido. Usando esta información cada nodo de la red determina que acción debe realizar. En la figura \ref{fig:canBus} se presenta un esquema básico de una red CAN compuesta por 4 nodos.
 
+\newpage
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=.5]{./Figures/CANBUS_Esquema.png}
 	\caption{Esquema de red CAN.}
@@ -47,7 +48,7 @@ Para realizar la transferencia de información CAN requiere únicamente 2 línea
 
 \section{Servomotores}
 
-Un servomotor\citep{Industrial_Automation_Hands_On} es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular de su eje, así como la velocidad de rotación y el torque de salida. Esto se consigue con la utilización de un sistema de lazo cerrado de control que se retroalimenta con un sensor de posición angular llamado \textit{encoder}. En general, el tipo de bobinas del motor eléctrico no determina la condición de servomotor, sino que este cuente con las cualidades de control descriptas. En la figura \ref{fig:servomotor} \citep{web_partes_servomotor} se pueden observar las distintas partes que conforman un servomotor.
+Un servomotor \citep{Industrial_Automation_Hands_On} es un tipo de motor eléctrico que tiene la capacidad de controlar la posición angular de su eje, así como la velocidad de rotación y el torque de salida. Esto se consigue con la utilización de un sistema de lazo cerrado de control que se retroalimenta con un sensor de posición angular llamado \textit{encoder}. En general, el tipo de bobinas del motor eléctrico no determina la condición de servomotor, sino que este cuente con las cualidades de control descriptas. En la figura \ref{fig:servomotor} \citep{web_partes_servomotor} se pueden observar las distintas partes que conforman un servomotor.
 
 \begin{figure}[htbp]
 	\centering
@@ -66,18 +67,18 @@ El proyecto SN-17 (Servo NEMA 17) es un sistema desarrollado como emprendimiento
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=.35]{./Figures/SN17_5.jpeg}
+	\includegraphics[scale=.3]{./Figures/SN17_5.jpeg}
 	\caption{Plaqueta SN-17.}
 	\label{fig:SN17}
 \end{figure}
 
-Además de generar las funcionalidades mencionadas, el sistema SN-17 tiene señales discretas industriales que le permite comunicarse con controladores industriales (\textit{Programmable Logic Controllers} o PLCs).
+Además de generar las funcionalidades mencionadas, el sistema SN-17 utiliza señales discretas industriales que le permiten comunicarse con controladores de uso industrial (\textit{Programmable Logic Controllers} o PLCs).
 
-Actualmente se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA\citep{web_cambre}, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
+Actualmente se está trabajando en implementar estos sistemas en la planta de la empresa Cambre ICyFSA \citep{web_cambre}, donde se están construyendo distintos dispositivos para aplicaciones industriales con estos motores. En la figura \ref{fig:aplicacionSN17} se puede observar un dibujo CAD de un actuador lineal con un sistema SN-17 implementado. Este funciona como un prensador en un proceso industrial.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=.5]{./Figures/Prensador-N17.PNG}
+	\includegraphics[width=0.7\linewidth ,height=0.3\textheight]{./Figures/Prensador-N17.PNG}
 	\caption{Actuador lineal con SN-17.}
 	\label{fig:aplicacionSN17}
 \end{figure}
@@ -86,7 +87,7 @@ Actualmente se está trabajando en implementar estos sistemas en la planta de la
 
 \section{Motivación}
 
-En la actualidad el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático \citep{web_actuator_market}. Sin embargo, en los últimos años el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que poseen y a sus menores costos operativos\citep{web_comparacion_actuadores}. En la tabla \ref{tab:comparacion_neumatico_electrico} se muestra una comparativa de ambos tipos de actuadores.
+En la actualidad el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático \citep{web_actuator_market}. Sin embargo, en los últimos años el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que poseen y a sus menores costos operativos \citep{web_comparacion_actuadores}. En la tabla \ref{tab:comparacion_neumatico_electrico} se muestra una comparativa de ambos tipos de actuadores.
 
 \begin{table}[htpb]
 	\centering
@@ -109,7 +110,7 @@ En la actualidad el ámbito de actuadores industriales está principalmente domi
 	\label{tab:comparacion_neumatico_electrico}
 \end{table}
 
-Los actuadores eléctricos suelen emplear un servomotor en su interior que, junto con un mecanismo, generan el movimiento deseado con una precisión superior a los actuadores neumáticos. Aún así, este tipo de actuadores tienen como problema su elevado costo de adquisición y su dificultad de implementación, que limitan su uso. En este contexto la organización A3 Engineering desarrolló el sistema SN-17 en un intento de disminuir los costos de los servomotores de aplicaciones pequeñas y, en un futuro, de los actuadores eléctricos.
+Los actuadores eléctricos suelen emplear un servomotor en su interior que, junto con un mecanismo, generan el movimiento deseado con una precisión superior a los actuadores neumáticos. Aún así, este tipo de actuadores tienen como problema su elevado costo de adquisición y su dificultad de implementación, que limitan su uso. En este contexto, la organización A3 Engineering desarrolló el sistema SN-17 en un intento de disminuir los costos de los servomotores de aplicaciones pequeñas y, en un futuro, de los actuadores eléctricos.
 
 La empresa Cambre ICyFSA instaló una serie de sistemas SN-17 en su planta productiva con resultados iniciales exitosos. Sin embargo, se limitó la implementación de más sistemas debido a su dificultad para reprogramarlos en momentos de necesidad. Esto se debe a que requieren de un cambio de \textit{firmware} para modificar su configuración y esto solo puede ser realizado por personal calificado. La motivación de este trabajo es brindar una interfaz para programación y monitoreo de una red de motores que pueda ser utilizada por personal no especializado.
 
@@ -118,7 +119,7 @@ La empresa Cambre ICyFSA instaló una serie de sistemas SN-17 en su planta produ
 
 \section{Estado del arte}
 
-Actualmente existe una extensa oferta de servomotores y motores paso a paso en el mercado. En general, lo que en el ámbito industrial se refiere a servomotores\citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un precio significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia. En los casos en que se requiere alta potencia o alto rendimiento, estos servos son la opción indicada. Requieren de técnicos capacitados para su programación y ofrecen interfaces de usuario avanzadas. En general, representan soluciones de alto costo. Un motor AC de la empresa Panasonic\citep{web_servo_panasonic} junto con su \textit{driver} se presenta en la figura \ref{fig:ac-servo}. 
+Actualmente existe una extensa oferta de servomotores y motores paso a paso en el mercado. En general, lo que en el ámbito industrial se refiere a servomotores \citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un precio significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia. En los casos en que se requiere alta potencia o alto rendimiento, estos servos son la opción indicada. Requieren de técnicos capacitados para su programación y ofrecen interfaces de usuario avanzadas. En general, representan soluciones de alto costo. Un motor AC de la empresa Panasonic \citep{web_servo_panasonic} junto con su \textit{driver} se presenta en la figura \ref{fig:ac-servo}. 
 
 
 \begin{figure}[h!]
@@ -142,7 +143,7 @@ Por otro lado, en lo referido a motores \textit{steppers}, la oferta también es
 
 \footnotetext{\url{https://www.autonics.com/web/2022/12/29/6/46/15/1032047e-1a41-4c24-aee4-966f2109fd40.png}} %Link a imagen de closed loop stepper
 
-Finalmente, existen placas de control que, además de funcionar como un \textit{closed loop stepper}, tienen un \textit{driver} incorporado que permite controlar los motores de forma diferente, logrando entregar torque constante. El problema principal de estas soluciones es que suelen tener características de \textit{hobbista} y no son aptas para ámbitos industriales. También requieren de elevado conocimiento técnico para su programación debido a la falta de interfaces de programación. En la figura \ref{fig:mechaduino} se puede ver un ejemplo de una de estas placas llamada \textit{Mechaduino} \citep{web_mechaduino}.
+Finalmente, existen placas de control que, además de funcionar como un \textit{closed loop stepper}, tienen un \textit{driver} incorporado que permite controlar los motores de forma diferente, logrando entregar torque constante. El problema principal de estas soluciones es que suelen tener características de \textit{hobbista} y no son aptas para ámbitos industriales. También requieren de elevado conocimiento técnico para su programación debido a la falta de interfaces de usuario. En la figura \ref{fig:mechaduino} se puede ver un ejemplo de una de estas placas llamada \textit{Mechaduino} \citep{web_mechaduino}.
 
 \begin{figure}[h!]
 	\centering
@@ -153,7 +154,7 @@ Finalmente, existen placas de control que, además de funcionar como un \textit{
 
 \footnotetext{\url{https://tropical-labs.com/wp-content/uploads/2018/10/IMGP1300-1-1024x681.jpg}} %Link a imagen de mechaduino
 
-En la Tabla \ref{tab:servos} se resume la información de los distintos tipos de motores y sus controles explicada en esta sección.
+En la Tabla \ref{tab:servos} se resume la información de los distintos tipos de motores mencionados.
 
 
 \begin{table}[h!]
