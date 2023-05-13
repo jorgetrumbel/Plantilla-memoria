@@ -169,7 +169,7 @@ Existen modelos de LCD que incluyen una interfaz I2C (\textit{Inter-Integrated C
 
 La mayoría de los microcontroladores que se emplean en la actualidad poseen un periférico de I2C y sus herramientas de desarrollo proporcionan drivers de este protocolo. I2C es serial y sincrónico y requiere 2 líneas bidireccionales para su operación, los datos y el reloj. En un bus I2C los distintos dispositivos conectados tienen un código identificador que se emplea para controlar las comunicaciones.
 
-A la hora de implementar una solución con este tipo de pantallas puede tomarse de referencia alguna de las librerías de código abierto que se encuentran disponibles en la web. Esto ayuda a reducir significativamente los tiempos de desarrollo y es el camino que se tomó en este trabajo. En particular, se utilizó la librería \textit{LiquidCrystal\_I2C} para Arduino \citep{web_repo_display_i2c}.
+A la hora de implementar una solución con este tipo de pantallas, puede tomarse de referencia alguna de las librerías de código abierto que se encuentran disponibles en la web. Esto ayuda a reducir significativamente los tiempos de desarrollo y es el camino que se tomó en este trabajo. En particular, se utilizó la librería \textit{LiquidCrystal\_I2C} para Arduino \citep{web_repo_display_i2c}.
 
 \newpage
 
@@ -197,7 +197,7 @@ Como en el caso de las pantallas LCD, existen muchas librerías de código abier
 
 \subsection{Conversores UART-USB}
 \label{conversor_usb}
-La \textit{Universal Asynchronous Receive Transmit} o UART es un protocolo serial de comunicación muy utilizado en sistemas embebidos. Se caracteriza principalmente por su sencillez. Como su nombre indica es un protocolo asincrónico que requiere una única línea para el envío de datos o dos si se desea envíar y recibir.
+La \textit{Universal Asynchronous Receive Transmit} o UART es un protocolo serial de comunicación muy utilizado en sistemas embebidos. Se caracteriza principalmente por su sencillez. Como su nombre indica, es un protocolo asincrónico que requiere una única línea para el envío de datos o dos si se desea envíar y recibir.
 
 La mayoría de los microcontroladores que se comercializan en la actualidad disponen de uno o más periféricos UART. Es común que el propio fabricante provea los \textit{drivers} de implementación para reducir los tiempos de desarrollo.
 

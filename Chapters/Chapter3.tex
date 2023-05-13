@@ -120,8 +120,9 @@ Los componentes de interfaz elegidos fueron:
 \section{Comunicación CAN}
 \label{comunicacion_can}
 
-La implementación de una red CAN requiere consideraciones de diseño relacionadas con el \textit{bitrate} y los tiempos de bit con los cuales trabaja el protocolo para la lectura y envío de información. Como se explicó en la sección \ref{caracteristicas_can}, estas variables están relacionadas con la longitud del bus y con el ruido eléctrico al que está expuesto. En la figura \ref{tab:bit_times} se presentan los tiempos de bit recomendados para implementaciones de CANopen \citep{UnderstandingCAN}. Del listado se seleccionó la fila para un bus de 250 m, que recomienda un \textit{bitrate} de 250 kb/s. Estos parámetros se configuraron en el periférico CAN del microcontrolador.
+La implementación de una red CAN requiere consideraciones de diseño relacionadas con el \textit{bitrate} y los tiempos de bit con los cuales trabaja el protocolo para la lectura y envío de información. Como se explicó en la sección \ref{caracteristicas_can}, estas variables están relacionadas con la longitud del bus y con el ruido eléctrico al que está expuesto. En la tabla \ref{tab:bit_times} se presentan los tiempos de bit recomendados para implementaciones de CANopen \citep{UnderstandingCAN}. Del listado se seleccionó la fila para un bus de 250 m, que recomienda un \textit{bitrate} de 250 kb/s. Estos parámetros se configuraron en el periférico CAN del microcontrolador.
 
+\newpage
 
 \begin{table}[h!]
 	\centering
@@ -144,10 +145,14 @@ La implementación de una red CAN requiere consideraciones de diseño relacionad
 	\label{tab:bit_times}
 \end{table}
 
-
 La estructura empleada para la codificación de la información dentro de los mensajes CAN se muestra en la figura \ref{fig:estructura_mensajes}. Se utilizaron tanto el campo de identificador estándar de 11 bits, como los bytes de data para indicar el tipo de mensaje y la manera en que debe ser procesado.
 
-\newpage
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\linewidth ,height=0.12\textheight]{./Figures/estructura_mensaje.png}
+	\caption{Estructura de mensajes CAN}
+	\label{fig:estructura_mensajes}
+\end{figure}
 
 Dentro del campo identificador se codificó la siguiente información:
 \begin{itemize}
@@ -160,12 +165,7 @@ Se estableció el primer bit del mensaje como identificación de errores para qu
 
 En los bits que corresponden al \textit{device ID} también se especifican identificadores comunes para mensajes del tipo \textit{broadcast}. Estos permiten la transmisión de información a todos los nodos de la red.
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=1\linewidth ,height=0.12\textheight]{./Figures/estructura_mensaje.png}
-	\caption{Estructura de mensajes CAN}
-	\label{fig:estructura_mensajes}
-\end{figure}
+
 
 El campo de data tiene una longitud total de 8 bytes. Este contiene la siguiente información:
 \begin{itemize}
@@ -279,7 +279,7 @@ En la figura \ref{fig:can_handler} se observa el flujo de programa implementado 
 
 En la recepción de mensajes se empleó un módulo de software de \textit{buffer} circular \citep{tpf_gabriel}. La operación de recepción de mensajes CAN se hace en un estado de interrupción. Para evitar el procesamiento del mensaje en este estado se utiliza el algorítmo de \textit{buffer} circular, que almacena el mensaje en tiempo de interrupción sin procesarlo y señaliza esta condición. Estos mensajes son luego tratados dentro del bucle principal del programa. Este funcionamiento permite una operatoria ordenada y evita la pérdida de información en caso de que nuevos mensajes lleguen al bus sin que los anteriores hayan sido procesados.
 
-Para la interpretación de los mensajes se construyó el módulo de software marcado como utilidades servomotores en la figura \ref{fig:arq_software}. Dentro de este se implementaron distintas funciones locales que decodifican el identificador y la data según el tipo de mensaje. Con el identificador CAN se determina si el mensaje recibido indica un error (primer bit) y si está dirigido a un SN-17 o al SCI-CAN (último bit de dirección). Con respecto a la información del tipo, como se explicó en la sección \ref{comunicacion_can}, se encuentra codificada en el primer byte de data del mensaje CAN. Esta información es discriminada por el algorítmo y, utilizando una estructura \textit{switch-case}, se selecciona la función decodificadora correspondiente.
+Para la interpretación de los mensajes se construyó el módulo de software marcado como "utilidades servomotores" en la figura \ref{fig:arq_software}. Dentro de este se implementaron distintas funciones locales que decodifican el identificador y la data según el tipo de mensaje. Con el identificador CAN se determina si el mensaje recibido indica un error (primer bit) y si está dirigido a un SN-17 o al SCI-CAN (último bit de dirección). Con respecto a la información del tipo, como se explicó en la sección \ref{comunicacion_can}, se encuentra codificada en el primer byte de data del mensaje CAN. Esta información es discriminada por el algorítmo y, utilizando una estructura \textit{switch-case}, se selecciona la función decodificadora correspondiente.
 
 
 \subsection{Interfaz HMI}
@@ -288,11 +288,11 @@ La interfaz HMI involucra la interacción del software del sistema con el teclad
 
 La capa inferior del display se compone del driver I2C obtenido del fabricante del microcontrolador y una serie de servicios para mostrar información que son llamados por las capas superiores. Los servicios fueron modelados siguiendo ejemplos de código libre de implementaciones para Arduino \citep{web_repo_display_i2c}.
 
-El driver del teclado sigue una arquitectura similar \citep{web_repo_keypad}. Este usó como ejemplo implementaciones libres de Arduino \citep{web_repo_keypad}. Esta capa ofrece servicios a las superiores para reconocer las teclas que fueron oprimidas.
+El driver del teclado sigue una arquitectura similar \citep{web_repo_keypad}. Se utilizaron como ejemplo implementaciones libres de Arduino \citep{web_repo_keypad}. Esta capa ofrece servicios a las superiores para reconocer las teclas que fueron oprimidas.
 
 Sobre estos manejadores se desarrolló un software que utiliza a ambos para generar el sistema de menúes y controlar la interacción con un usuario. Mediante el uso del teclado se puede navegar a través de una lista de opciones que se muestran en el display y se permite visualizar y configurar los parámetros de los motores conectados. 
 
-En la figura \ref{fig:menu} se muestra un ejemplo de cómo se presentan las opciones en el display. La flecha presente a la izquierda de la imagen es la que le permite al usuario ubicarse a medida que navega por los menúes con la utilización del teclado.
+En la figura \ref{fig:menu} se muestra un ejemplo de cómo se presentan las opciones en el display. La flecha presente a la izquierda de la imagen es la que le permite al usuario ubicarse a medida que navega por los menúes mediante la utilización del teclado.
 
 \begin{figure}[htbp]
 	\centering
@@ -301,7 +301,7 @@ En la figura \ref{fig:menu} se muestra un ejemplo de cómo se presentan las opci
 	\label{fig:menu}
 \end{figure}
 
-Se planteó que el menú cuente con dos pantallas diferentes según el estado en el que esté: monitoreo o programación. En el estado de monitoreo, se muestra una primera pantalla donde puede observarse el programa e instrucción que cada motor conectado está ejecutando en ese momento. A su vez puede navegarse para consultar la configuración, pero no puede ser modificada.
+Se planteó que el menú cuente con dos pantallas diferentes según el estado en el que esté el sistema: monitoreo o programación. En el estado de monitoreo, se muestra una primera pantalla donde puede observarse el programa e instrucción que cada motor conectado está ejecutando en ese momento. A su vez puede navegarse para consultar la configuración, pero no puede ser modificada.
 
 En el estado de programación, la configuración de los distintos motores es accesible para ser modificada y se muestran los distintos comandos manuales que pueden ejecutarse para cada motor. Al pasar del estado de monitoreo al de programación, la central envía un mensaje de \textit{broadcast} usando un ID prioritario a la red al que cada motor responde con su ID particular.
 
@@ -313,13 +313,13 @@ La interfaz UART-USB involucró el desarrollo de un manejador de UART desde el m
 
 Los mensajes UART son adaptados a señales USB mediante el circuito integrado CY7C64225 \citep{web_interfaz_USB_UART}. Esto permite la conexión del dispositivo con un monitor serial en una PC.
 
-Sobre este manejador UART se construyó una herramienta de reporte que se ejecuta en la capa de aplicación que envía las acciones seleccionadas por el menú a través de USB. Esto permite confirmar que la información seleccionada es la correcta y facilita la detección de errores.
+Sobre este manejador UART se construyó una herramienta de reporte que se ejecuta en la capa de aplicación y envía las acciones seleccionadas por el menú a través de USB. Esto permite confirmar que la información seleccionada es la correcta y facilita la detección de errores.
 
 La interfaz de PC permite también configurar las acciones de los motores. La configuración una vez que llega al SCI-CAN es transformada en comandos CAN y enviada al nodo correspondiente.
 
 \section{Modificaciones firmware SN-17}
 
-Para que el sistema SCI-CAN pudiera comunicarse con las plaquetas SN-17 ya instaladas se debió trabajar y actualizar su firmware. Estos cambios tuvieron 3 objetivos principales:
+Para que el sistema SCI-CAN pudiera comunicarse con las plaquetas SN-17 ya instaladas, se debió trabajar y actualizar su firmware. Estos cambios tuvieron 3 objetivos principales:
 \begin{itemize}
 	\item Incorporar los drivers de CAN y la estructura de mensajes planteada.
 	\item Generar que las configuraciones y programas sean variables modificables.
@@ -330,7 +330,7 @@ La implementación de CAN utilizó los mismos módulos de software desarrollados
 
 En la implementación del módulo de utilidades de servomotores se buscó también que ambos sistemas compartan el mismo software. Para ello, se planteó el uso de sentencias condicionales que determinen si un mensaje está dirigido a un sistema SCI-CAN o a un SN-17. A partir de esto se decide la acción a realizar en la capa de aplicación según la información del mensaje.
 
-Para lograr que las configuraciones y los programas del sistema SN-17 sean modificables sin necesidad de cambiar el firmware se utilizó una estructura para almacenar la información. Esta es accedida directamente por la capa de aplicación, quien se encarga de administrarla. La información presente en la estructura se resume en la tabla \ref{tab:servo_status}.
+Para lograr que las configuraciones y los programas del sistema SN-17 sean modificables sin necesidad de cambiar el firmware, se utilizó una estructura para almacenar la información. Esta es accedida directamente por la capa de aplicación, quien se encarga de administrarla. La información presente en la estructura se resume en la tabla \ref{tab:servo_status}.
 
 \begin{table}[h]
 	\centering
@@ -382,11 +382,11 @@ El primer paso del diseño fue determinar los subcircuitos del sistema. Estos so
 	\item Interfaz UART-USB.
 \end{itemize}
 
-En cada uno de los subcircuitos se desarrolló un dibujo esquemático. En la figura \ref{fig:esquematico_can} se presenta el correspondiente a la interfaz CAN donde se muestra el \textit{transceiver} elegido y sus conexiones. Para cada uno de los componentes principales del sistema se siguieron las recomendaciones indicadas en su hoja de datos. 
+Para cada uno de los subcircuitos se desarrolló un dibujo esquemático. En la figura \ref{fig:esquematico_can} se presenta el correspondiente a la interfaz CAN, donde se muestra el \textit{transceiver} elegido y sus conexiones. Para cada uno de los componentes principales del sistema se siguieron las recomendaciones indicadas en su hoja de datos. 
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=.7]{./Figures/sch_can.JPG}
+	\includegraphics[scale=.75]{./Figures/sch_can.JPG}
 	\caption{Esquemático de Interfaz CAN.}
 	\label{fig:esquematico_can}
 \end{figure}
@@ -401,7 +401,7 @@ En el diseño del \textit{PCB} se buscó que:
 	\item Se minimizara la longitud de las líneas de CAN y se maximizara su simetría.
 \end{itemize}
 
-La figura \ref{fig:render_pcb} muestra el render 3D del \textit{PCB} obtenido. En la parte superior se encuentran los circuitos de entradas y salidas industriales eléctricamente aislados por los optoacopladores y separados del resto del circuito. En la esquina inferior izquierda se encuentra el regulador de tensión de 5 V. En el centro el microcontrolador y a la derecha el circuito de CAN y de USB.
+La figura \ref{fig:render_pcb} muestra el render 3D del \textit{PCB} obtenido. En la parte superior se encuentran los circuitos de entradas y salidas industriales eléctricamente aislados por los optoacopladores y separados del resto del circuito. En la esquina inferior izquierda se encuentra el regulador de tensión de 5 V. En el centro el microcontrolador y a la derecha los circuitos de CAN y de USB.
 
 \begin{figure}[htbp]
 	\centering

@@ -63,7 +63,7 @@ Un servomotor \citep{Industrial_Automation_Hands_On} es un tipo de motor eléctr
 
 \section{Proyecto SN-17}
 
-El proyecto SN-17 (Servo NEMA 17) es un sistema desarrollado como emprendimiento personal (A3 Engineering) que adapta motores eléctricos del tipo paso a paso o \textit{steppers} para funcionar como servomotores. El sistema SN-17 agrega un \textit{encoder} y un \textit{driver} al motor, el cual genera un lazo cerrado y logra las funcionalidades de un servomotor. En la figura \ref{fig:SN17} se puede observar una placa de control SN-17. Esta se coloca en la parte trasera del motor paso a paso.
+El proyecto SN-17 (Servo NEMA 17) es un sistema desarrollado como emprendimiento personal (A3 Engineering) que adapta motores eléctricos del tipo paso a paso o \textit{steppers} para funcionar como servomotores. El sistema SN-17 agrega un \textit{encoder} y un \textit{driver} al motor, los cuales generan un lazo cerrado, logrando así que el motor tenga las funcionalidades de un servomotor. En la figura \ref{fig:SN17} se puede observar una placa de control SN-17. Esta se coloca en la parte trasera del motor paso a paso.
 
 \begin{figure}[htbp]
 	\centering
@@ -86,6 +86,7 @@ Actualmente se está trabajando en implementar estos sistemas en la planta de la
 %----------------------------------------------------------------------------------------
 
 \section{Motivación}
+\label{motivacion}
 
 En la actualidad el ámbito de actuadores industriales está principalmente dominado por aquellos de carácter neumático \citep{web_actuator_market}. Sin embargo, en los últimos años el uso de actuadores eléctricos ha empezado a ser más significativo debido a las mayores aptitudes de control que poseen y a sus menores costos operativos \citep{web_comparacion_actuadores}. En la tabla \ref{tab:comparacion_neumatico_electrico} se muestra una comparativa de ambos tipos de actuadores.
 
@@ -118,6 +119,7 @@ La empresa Cambre ICyFSA instaló una serie de sistemas SN-17 en su planta produ
 %----------------------------------------------------------------------------------------
 
 \section{Estado del arte}
+\label{estado_del_arte}
 
 Actualmente existe una extensa oferta de servomotores y motores paso a paso en el mercado. En general, lo que en el ámbito industrial se refiere a servomotores \citep{Industrial_Automation_Hands_On} son motores del tipo DC \textit{brushless} o AC de inducción (monofásicos y trifásicos). Estos tienen un precio significativamente mayor que los \textit{steppers} y suelen requerir de \textit{drivers} externos y, en caso de motores AC, variadores de frecuencia. En los casos en que se requiere alta potencia o alto rendimiento, estos servos son la opción indicada. Requieren de técnicos capacitados para su programación y ofrecen interfaces de usuario avanzadas. En general, representan soluciones de alto costo. Un motor AC de la empresa Panasonic \citep{web_servo_panasonic} junto con su \textit{driver} se presenta en la figura \ref{fig:ac-servo}. 
 

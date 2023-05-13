@@ -208,6 +208,8 @@
 \RequirePackage{xcolor}
 \RequirePackage{subcaption}
 
+\RequirePackage{multirow}
+
 \addbibresource{references.bib} % The filename of the bibliography
 
 \urlstyle{same}

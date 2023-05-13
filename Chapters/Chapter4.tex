@@ -16,8 +16,8 @@ En la figura \ref{fig:Banco} se puede observar el banco de pruebas utilizado. El
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=1]{./Figures/LCD.jpg}
-	\caption{Banco de pruebas utilizado para verificaciones - ARAMR FIGURA}
+	\includegraphics[scale=0.5]{./Figures/banco_pruebas.png}
+	\caption{Banco de pruebas utilizado para verificaciones}
 	\label{fig:Banco}
 \end{figure}
 
@@ -90,24 +90,24 @@ Las salidas PNP del sistema se ensayaron con una conexión a un PLC Omron NX102 
 
 Con las entradas del sistema se realizó un procedimiento similar, conectando cada una a un módulo de salidas PNP NX-OD5256. Se activaron las salidas desde el PLC y se verificó que se recibe la señal desde el sistema.
 
-VER DE AGREGAR UNA IMAGEN CON EL DISPOSITIVO CONECTADO AL PLC
-
 \section{Ensayos de mensajes UART-USB}
 
 En la medición de la comunicación con la PC se utilizó el mismo banco de medición conectando la punta del osciloscopio al bus de datos UART-USB.
 
 En la figura \ref{fig:signal_uart} se muestra una imagen del osciloscopio con las mediciones realizadas sobre la señal de UART. Se verifica el tiempo de bit correcto de 106 $\mu$s, correspondiente a un \textit{baudrate} de 9600 y el nível de tensión de 5 V. Se comprobó que los mensajes enviados y recibidos fueran correctos y que el sistema actuara acorde a lo esperado.
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.6]{./Figures/bit_time_uart.jpeg}
 	\caption{Medición de señal UART}
 	\label{fig:signal_uart}
 \end{figure}
 
+\newpage
+
 Por otro lado, se verificó que los niveles de señal USB, obtenida luego del integrado CY7C64225 fueran correctos. En la figura \ref{fig:signal_usb} se presenta la medición obtenida, donde se ve la señal diferencial correspondiente al protocolo USB en modo \textit{full-speed}. Se puede comprobar el nivel de tensión de 3 V y el tiempo de bit de 83 ns. Esto corresponde con la especificación del dispositivo.
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[scale=0.6]{./Figures/msg_usb.jpeg}
 	\caption{Medición de señal USB}
@@ -118,10 +118,10 @@ Por otro lado, se verificó que los niveles de señal USB, obtenida luego del in
 
 El dispositivo fue ensayado en la planta de Cambre ICyFSA donde se conectó en una línea de ensamble automática en desarrollo. Esta línea cuenta con varios sistemas SN-17 montados para realizar distintas actuaciones mecánicas. También, la línea cuenta con un PLC Omron NX-102 que controla el proceso. La figura \ref{fig:esquema_conexion_planta} muestra el esquema de conexionado empleado para realizar las pruebas del sistema en la línea de ensamblaje.
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[scale=1]{./Figures/LCD.jpg}
-	\caption{Esquema de conexionado en planta - ARAMR FIGURA}
+	\includegraphics[scale=0.5]{./Figures/esquema_cambre.png}
+	\caption{Esquema de conexionado en planta}
 	\label{fig:esquema_conexion_planta}
 \end{figure}
 
@@ -129,21 +129,70 @@ Con la disposición explicada se realizó la programación de los sistemas SN-17
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[scale=1]{./Figures/LCD.jpg}
-	\caption{Monitoreo de SN-17 - ARAMR FIGURA INCLUIR ERROR}
+	\includegraphics[scale=0.1]{./Figures/menu_error.jpg}
+	\caption{Monitoreo de SN-17}
 	\label{fig:pantalla_monitoreo}
 \end{figure}
 
 También, se verificó la comunicación a través de señales discretas con el PLC. Como se puede observar en el display del sistema de la figura \ref{fig:pantalla_monitoreo}, en caso de que un sistema SN-17 se encuentre en error se visualiza junto al número de instrucción. En estos casos, el sistema envía una señal al PLC para indicarle el estado de error.
 
-En la figura \ref{fig:sistema_en_planta} se muestra el dispositivo montado en la línea de ensamblaje automático en Cambre ICyFSA.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[scale=1]{./Figures/LCD.jpg}
-	\caption{Sistema montado en línea de ensamble automático - ARAMR FIGURA}
-	\label{fig:sistema_en_planta}
-\end{figure}
-
 \section{Comparación con estado del arte}
 
+Una comparación detallada de las características de los sistemas desarrollados contra los motores presentes en el mercado, que se explicaron en la sección \ref{estado_del_arte}, se presenta en la tabla \ref{tab:comparacion_estado_arte}.
+
+\begin{table}[h!]
+	\centering
+	\caption[Comparación de características de servomotores]{Comparación de características de servomotores.}
+	\begin{tabular}{p{4 cm} c c c c}
+		\toprule
+		\centering \multirow{2}{*} {\textbf{Característica}}  & \textbf{Servomotor} & \multirow{2}{*} {\textbf{\textit{Stepper}}} & \multirow{2}{*} {\textbf{\textit{Mechaduino}}} & \textbf{SN-17 +} \\
+										  & \textbf{industrial} & 		  & 		   & \textbf{SCI-CAN}  \\	
+		\midrule
+		Lazo cerrado & Sí & No & Sí & Sí \\
+		\textit{Driver} incorporado & No & No & Sí & Sí \\
+		Apto industrial & Sí & Sí & No & Sí \\
+		Interfaz programación & Sí & No & No & Sí \\
+		IO industrial & Sí & Sí & No & Sí \\
+		Red comunicación & Sí & No & No & Sí \\
+		\textit{Fieldbus} ethernet & Sí & No & No & No \\
+		Precio (USD) & >1.500 & 300 & 200 & 300 \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:comparacion_estado_arte}
+\end{table}
+
+Se puede observar una variación muy grande entre las prestaciones de los distintos productos. Como se explicó en la sección \ref{motivacion}, la motivación de este trabajo es conseguir un sistema con características similares a un servomotor industrial, pero con costos menores. Se destaca como ventaja adicional del sistema desarrollado la inclusión del \textit{driver} y el puerto de comunicación dentro del SN-17. Esto permite reducir el cableado y la complejidad de una implementación de un servomotor. 
+
+Por otro lado, el sistema desarrollado es adaptable para poder incorporar otros protocolos de comunicación industriales, como buses de campo ethernet. Si bien esto no estaba incluido en el alcance del trabajo, el software desarrollado puede ser reutilizado en caso de necesitar ampliarse el tipo de comunicaciones disponibles. 
+
+En la tabla \ref{tab:comparacion_interfaces} se presenta una comparación entre las características presentes en las interfaces de los servomotores industriales que se comercializan en el mercado contra lo desarrollado en este trabajo.
+
+\begin{table}[h!]
+	\centering
+	\caption[Comparación de características de interfaces]{Comparación de características de interfaces.}
+	\begin{tabular}{p{7 cm} c c}
+		\toprule
+		\centering \multirow{2}{*} {\textbf{Característica}}  & \textbf{Servomotor} & \textbf{SN-17 +} \\
+										  & \textbf{industrial} & \textbf{SCI-CAN}  \\	
+		\midrule
+		Interfaz de programación & Sí & Sí \\
+		Interfaz gráfica & Sí & No \\
+		Aplicación de PC & Sí & No \\
+		Configuración general & Sí & Sí \\
+		Configuración variables PID & Sí & Sí \\
+		Configuración IO & Sí & Sí \\
+		Comandos de movimientos manuales & Sí & Sí \\
+		Comandos de IO manuales & Sí & Sí \\
+		Monitoreo de programa & Sí & Sí \\
+		Monitoreo de red & Sí & Sí \\
+		Monitoreo de errores & Sí & Sí \\
+		\bottomrule
+		\hline
+	\end{tabular}
+	\label{tab:comparacion_interfaces}
+\end{table}
+
+En lo referido a las prestaciones de la interfaz del SCI-CAN, todas las acciones operativas presentes en un sistema comercial fueron incorporadas. Es importante notar que, si bien el alcance del trabajo no incluye una interfaz gráfica, esto se diagramó para poder ser desarrollado en un futuro utilizando el puerto UART - USB del sistema.
+
+En la planta de Cambre ICyFSA, las pruebas realizadas con sistemas SN-17 con interfaces SCI-CAN no presentaron diferencias operativas distinguibles con respecto a los servomotores industriales comerciales mencionados en el trabajo.
