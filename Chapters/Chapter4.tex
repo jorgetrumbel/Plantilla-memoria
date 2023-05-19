@@ -24,7 +24,7 @@ En la figura \ref{fig:Banco} se puede observar el banco de pruebas utilizado. El
 
 \section{Ensayo de mensajes CAN}
 
-En la figura \ref{fig:niv_señal} se puede ver una de trama CAN medida con el osciloscopio. Se identifican las señales CAN-H y CAN-L con valores de tensión acordes a lo esperado. Es importante notar la ausencia de ruido en la señal, que indica la correcta slección de los resistores de terminación.
+En la figura \ref{fig:niv_señal} se puede ver una trama CAN medida con el osciloscopio. Se identifican las señales CAN-H y CAN-L con valores de tensión acordes a lo esperado. Es importante notar la ausencia de ruido en la señal, que indica la correcta selección de los resistores de terminación.
 
 \begin{figure}[htbp]
 	\centering
@@ -33,7 +33,7 @@ En la figura \ref{fig:niv_señal} se puede ver una de trama CAN medida con el os
 	\label{fig:niv_señal}
 \end{figure}
 
-En la figura \ref{fig:tiempo_bit_can} se presenta la medición de tiempo tomada desde el osciloscopio para uno de los bits de un mensaje CAN. Se puede ver en la esquina superior izquierda el valor de tiempo obtenido de 4.1 $\mu$s, que es lo esperado según lo explicado en la sección \ref{comunicacion_can}. Este tiempo implica una velocidad de transmisión de 250 kb/s.
+En la figura \ref{fig:tiempo_bit_can} se presenta la medición de tiempo tomada desde el osciloscopio para uno de los bits de un mensaje CAN. Se puede ver en la esquina superior izquierda el valor de tiempo obtenido de 4,1 $\mu$s, que es lo esperado según lo explicado en la sección \ref{comunicacion_can}. Este tiempo implica una velocidad de transmisión de 250 kb/s.
 
 \begin{figure}[htbp]
 	\centering
@@ -53,7 +53,7 @@ Como ejemplo, la figura \ref{fig:mot_calib} presenta una imagen tomada del oscil
 	\label{fig:mot_calib}
 \end{figure}
 
-Otro ejemplo de mensaje puede visualizarse en la figura \ref{fig:mot_move} en la que se envía al motor un comando manual de movimiento angular (código: 0x10), en dirección en contra de las agujas del reloj (código 0x01), un ángulo de 360 grados (códigos: 0x01 y 0x68). En este caso, como el ángulo es un número que requiere más de un byte para su representación aparece descompuesto en el mensaje. Al recibir el mensaje, el motor realiza el giro estipulado.
+Otro ejemplo de mensaje puede visualizarse en la figura \ref{fig:mot_move} en la que se envía al motor un comando manual de movimiento angular (código: 0x10), en dirección en contra de las agujas del reloj (código 0x01) con un ángulo de 360 grados (códigos: 0x01 y 0x68). En este caso, como el ángulo es un número que requiere más de un byte para su representación aparece descompuesto en el mensaje. Al recibir el mensaje, el motor realiza el giro estipulado.
 
 \begin{figure}[htbp]
 	\centering
@@ -76,8 +76,8 @@ Los ensayos eléctricos se realizaron sobre la plaqueta de control conectada dir
 		\midrule
 		Regulador & 5 V a la salida del regulador\\
 		Referencias fuente & 24 V en bornes de referencia de fuente \\
-		Referencias regulador & 5 V en bornes de referencia de controlador \\
-		IOs controlador & 5 V en bornes de IOs de controlador \\		
+		Referencias regulador & 5 V en bornes de referencia del controlador \\
+		IOs controlador & 5 V en bornes de IOs del controlador \\		
 		IOs puenteadas 	& 24 V en IOs aisladas puenteadas a tensión de entrada \\
 		IOs	diferidas	& IOs aisladas a 12 V con alimentación de sistema a 24 V \\
 		\bottomrule
@@ -155,7 +155,7 @@ Una comparación detallada de las características de los sistemas desarrollados
 		IO industrial & Sí & Sí & No & Sí \\
 		Red comunicación & Sí & No & No & Sí \\
 		\textit{Fieldbus} ethernet & Sí & No & No & No \\
-		Precio (USD) & >1.500 & 300 & 200 & 300 \\
+		Precio (USD) & >1500 & 300 & 200 & 300 \\
 		\bottomrule
 		\hline
 	\end{tabular}
